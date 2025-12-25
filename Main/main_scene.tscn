@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0fe3omp2ct25"]
+
+[ext_resource type="Script" path="res://Script/Main.gd" id="1_bbkd0"]
+[ext_resource type="Script" path="res://Script/Drill.gd" id="2_wrm16"]
+[ext_resource type="Script" path="res://Script/CameraBoost.gd" id="3_04con"]
+[ext_resource type="Script" path="res://Script/ChunkSpawner.gd" id="3_e4sre"]
+[ext_resource type="PackedScene" uid="uid://bcjqs1w7kgnwt" path="res://Scenes/PackedScene.tscn" id="4_yev77"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_fy6pk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msb1o"]
+metallic = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bwurn"]
+material = SubResource("StandardMaterial3D_msb1o")
+bottom_radius = 0.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xw4qx"]
+radius = 0.6
+
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_bbkd0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+camera_attributes = SubResource("CameraAttributesPhysical_fy6pk")
+
+[node name="Drill" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 1.5)
+motion_mode = 1
+up_direction = Vector3(2.60206e-13, 1, 2.60206e-13)
+script = ExtResource("2_wrm16")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Drill"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+mesh = SubResource("CylinderMesh_bwurn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Drill"]
+shape = SubResource("CapsuleShape3D_xw4qx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -4.96191e-16, 3.16108e-16, 3.16108e-16, 0.906308, 0.422618, -4.96191e-16, -0.422618, 0.906308, 2.08165e-12, 6, 10)
+fov = 65.0
+script = ExtResource("3_04con")
+
+[node name="ChunkSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00940371, 0.00750828, -0.00323105)
+script = ExtResource("3_e4sre")
+chunk_scene = ExtResource("4_yev77")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BestLabel" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ComboLabel" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ContinuePopup" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="FakeRankLabel" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
