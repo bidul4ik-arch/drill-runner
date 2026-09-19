@@ -16,7 +16,7 @@
 - `features-results.txt`: both locale rules, translated formatted HUD, cap show/hide/persistence, 250 populated obstacle sections and long-hazard behavior — zero failures.
 - `hero-results.txt`: movement-to-animation mapping, actual lowered skeleton during slide, required clips — zero failures.
 - `screens-results.txt`: both localized menus and wardrobes rendered.
-- Android 11 ARM64 Pixel 7a emulator: APK installed, menu and level launched; Russian selected through Android system language; swipes and background pause exercised. Runtime log contains an emulator shader-cache recompilation warning, no script error at that point. Emulator uses software rendering; its speed is not a physical-device performance measurement.
+- Android 11 ARM64 Pixel 7a emulator: APK installed, menu and level launched; Russian selected through Android system language; swipes and background pause exercised. Final APK was reinstalled after the hero update; the captured startup log has no script errors. Earlier installs recompiled an emulator shader cache. Emulator uses software rendering; its speed is not a physical-device performance measurement.
 
 ## Not complete
 
@@ -32,3 +32,5 @@ An early invocation of the systems test omitted `--test` and changed fields in t
 ## Reproduction
 
 Use Godot 4.2.2, Blender 5.2.2. Run tests with `-- --test`; additionally pass `--language=ru` for systems.gd's Russian expected messages. Source generators and export steps are in README. APK and signing keys are excluded from Git, while Blender sources, GLBs, texture atlases and test sources are included.
+
+Final APK SHA-256: `7ce3ea733bea033660be8942139aee6fcd74c56b5d9705d03f8a29395ae1d629`. Version code 3, version name 0.3-mobile. Hero base mesh: 114,856 triangles before generated LODs.
