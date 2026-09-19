@@ -1,0 +1,7 @@
+Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
+Vulkan API 1.2.231 - Forward+ - Using Vulkan Device #0: Apple - Apple M2
+ 
+LEVEL 1 state=victory ticks=9178 attacks=10 balance=520
+LEVEL 2 state=victory ticks=10322 attacks=10 balance=1235
+LEVEL 3 state=victory ticks=13727 attacks=21 balance=2205
+CAMPAIGN TEST: 0 failures

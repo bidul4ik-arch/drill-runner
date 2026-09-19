@@ -1,0 +1,7 @@
+[1;33mWARNING:[0;93m ObjectDB instances leaked at exit (run with --verbose for details).
+[0;90m     at: cleanup (core/object/object.cpp:2209)[0m
+[1;31mERROR:[0;91m Resources still in use at exit (run with --verbose for details).
+[0;90m   at: clear (core/io/resource.cpp:492)[0m
+Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
+OpenGL API 4.1 Metal - 89.4 - Compatibility - Using Device: Apple - Apple M2
+ 

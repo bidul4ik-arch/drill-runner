@@ -1,0 +1,5 @@
+{
+ "mining_robot":{"hp":4,"intro":3.5,"warning":[1.8,1.4],"weak_time":4.5,"attacks_per_window":[2,3],"phases":[[[2,-1,0],[-1,2,2],[1,-1,2]],[[2,0,-1],[1,1,1],[-1,2,0]]]},
+ "crystal_guardian":{"hp":4,"intro":3,"warning":[1.65,1.35],"weak_time":4,"attacks_per_window":[2,3],"phases":[[[0,0,0],[-1,2,0],[1,1,1]],[[2,-1,0],[1,1,1],[0,0,0]]]},
+ "giant_drill":{"hp":6,"intro":3.5,"warning":[1.65,1.25],"weak_time":3.8,"attacks_per_window":[3,4],"phases":[[[2,-1,2],[0,0,0],[-1,1,2]],[[1,1,1],[2,2,-1],[0,0,0],[-1,2,1]]]}
+}

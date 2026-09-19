@@ -1,0 +1,75 @@
+[
+  {
+    "id": 1,
+    "scene": "res://Scenes/Levels/OldMine.tscn",
+    "title": "Старая шахта",
+    "distance": 1800,
+    "speed": 11,
+    "max_speed": 17,
+    "track": "res://Art/Models/track.glb",
+    "fog": "d8b993",
+    "ambient": "ffe1b3",
+    "music_pitch": 1.0,
+    "atmosphere": "mine",
+    "reward": 150,
+    "boss": "mining_robot",
+    "boss_name": "Шахтный робот",
+    "tutorial": "Ящик — прыгай. Труба — подкат. Вагонетку обходи.",
+    "hazards": [
+      0,
+      1,
+      2
+    ],
+    "acceleration_seconds": 8
+  },
+  {
+    "id": 2,
+    "scene": "res://Scenes/Levels/CrystalCaves.tscn",
+    "title": "Кристальные пещеры",
+    "distance": 2400,
+    "speed": 12,
+    "max_speed": 19,
+    "track": "res://Art/Models/crystal_track.glb",
+    "fog": "34586d",
+    "ambient": "70ced6",
+    "music_pitch": 0.82,
+    "atmosphere": "cave",
+    "reward": 220,
+    "boss": "crystal_guardian",
+    "boss_name": "Кристальный страж",
+    "tutorial": "Тёмный провал — перепрыгни. Камни обвала — обойди.",
+    "hazards": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "acceleration_seconds": 8
+  },
+  {
+    "id": 3,
+    "scene": "res://Scenes/Levels/DrillingComplex.tscn",
+    "title": "Буровой комплекс",
+    "distance": 3000,
+    "speed": 13,
+    "max_speed": 21,
+    "track": "res://Art/Models/industrial_track.glb",
+    "fog": "716350",
+    "ambient": "f5d099",
+    "music_pitch": 1.16,
+    "atmosphere": "factory",
+    "reward": 350,
+    "boss": "giant_drill",
+    "boss_name": "Гигантская буровая машина",
+    "tutorial": "Подвижные затворы: следи за отметкой опасной полосы.",
+    "hazards": [
+      0,
+      1,
+      2,
+      4,
+      5
+    ],
+    "acceleration_seconds": 8
+  }
+]

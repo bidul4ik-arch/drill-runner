@@ -1,0 +1,6 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://Main/main_scene.tscn" id="1"]
+[ext_resource type="Script" path="res://Script/Campaign/CampaignRun.gd" id="2"]
+[node name="Endless" instance=ExtResource("1")]
+script = ExtResource("2")
+level_id = 0

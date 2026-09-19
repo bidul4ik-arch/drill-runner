@@ -1,0 +1,79 @@
+Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
+Vulkan API 1.2.231 - Forward+ - Using Vulkan Device #0: Apple - Apple M2
+ 
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #0, invalid UID: uid://wtb81yqi07jw - using text path instead: res://Art/Models/pipe_steel_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #1, invalid UID: uid://b3tbp5ubbsxxw - using text path instead: res://Art/Models/pipe_steel_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #2, invalid UID: uid://d3nyxhybahjjv - using text path instead: res://Art/Models/pipe_steel_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #3, invalid UID: uid://cseiol84v1f6p - using text path instead: res://Art/Models/pipe_teal_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #4, invalid UID: uid://bst5tecfwgfet - using text path instead: res://Art/Models/pipe_teal_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #5, invalid UID: uid://bjii8ewuw0pke - using text path instead: res://Art/Models/pipe_teal_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #6, invalid UID: uid://cs7t4qitiu8wd - using text path instead: res://Art/Models/pipe_gold_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #7, invalid UID: uid://dqvl3dleeu8ay - using text path instead: res://Art/Models/pipe_gold_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/pipe.glb: In external resource #8, invalid UID: uid://vygyi5srwxlq - using text path instead: res://Art/Models/pipe_gold_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #0, invalid UID: uid://bbgpt32f00hgk - using text path instead: res://Art/Models/track_sandstone.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #1, invalid UID: uid://oduwhu2j7s8s - using text path instead: res://Art/Models/track_rock_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #2, invalid UID: uid://07b0gd52tlg3 - using text path instead: res://Art/Models/track_sand_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #3, invalid UID: uid://irfhgn0h3rpp - using text path instead: res://Art/Models/track_wood_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #4, invalid UID: uid://deemg0wpfoeee - using text path instead: res://Art/Models/track_wood_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #5, invalid UID: uid://ckgssoxkdcym8 - using text path instead: res://Art/Models/track_wood_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #6, invalid UID: uid://csc13uoq7j0ox - using text path instead: res://Art/Models/track_steel_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #7, invalid UID: uid://r1qfjlqakbhp - using text path instead: res://Art/Models/track_steel_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #8, invalid UID: uid://bvcgwmdiybwve - using text path instead: res://Art/Models/track_steel_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #9, invalid UID: uid://bp5d4fehb7t2b - using text path instead: res://Art/Models/track_brass_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #10, invalid UID: uid://dxdmyyv83pcna - using text path instead: res://Art/Models/track_brass_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #11, invalid UID: uid://bwy8xx4vwr8nh - using text path instead: res://Art/Models/track_brass_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #12, invalid UID: uid://c7llt3acmu47m - using text path instead: res://Art/Models/track_leather_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #13, invalid UID: uid://dfacxo8v41265 - using text path instead: res://Art/Models/track_leather_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #14, invalid UID: uid://dygu6q5llisau - using text path instead: res://Art/Models/track_leather_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #15, invalid UID: uid://b2esosdho2v8m - using text path instead: res://Art/Models/track_teal_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #16, invalid UID: uid://b8lax6nigwg4f - using text path instead: res://Art/Models/track_teal_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/track.glb: In external resource #17, invalid UID: uid://dbfx1q7ky7llo - using text path instead: res://Art/Models/track_teal_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #0, invalid UID: uid://ck4by5h8kv8a - using text path instead: res://Art/Models/mining_robot_steel_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #1, invalid UID: uid://bk5vrxvhxvksf - using text path instead: res://Art/Models/mining_robot_steel_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #2, invalid UID: uid://b88wr6xiy4xhw - using text path instead: res://Art/Models/mining_robot_steel_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #3, invalid UID: uid://b6yv1i48fbei0 - using text path instead: res://Art/Models/mining_robot_silver_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #4, invalid UID: uid://b6js06m8gw8cj - using text path instead: res://Art/Models/mining_robot_silver_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #5, invalid UID: uid://bg5nnj7apkdh6 - using text path instead: res://Art/Models/mining_robot_silver_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #12, invalid UID: uid://bbvtm6xmf0c3e - using text path instead: res://Art/Models/mining_robot_wood_albedo.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #13, invalid UID: uid://cqrwrrwx1au1g - using text path instead: res://Art/Models/mining_robot_wood_roughness.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+[1;33mWARNING:[0;93m res://Art/Models/mining_robot.glb: In external resource #14, invalid UID: uid://b70lxej0tmiv7 - using text path instead: res://Art/Models/mining_robot_wood_normal.png
+[0;90m     at: open (core/io/resource_format_binary.cpp:1056)[0m
+LEVEL 1 state=victory ticks=9178 attacks=10 balance=509
+LEVEL 2 state=victory ticks=10322 attacks=10 balance=1209
+LEVEL 3 state=victory ticks=13727 attacks=21 balance=2172
+CAMPAIGN TEST: 0 failures

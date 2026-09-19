@@ -1,0 +1,37 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b7uoi733pvsih"
+path="res://.godot/imported/explorer_steel_normal.png-ceac6d7b889adcbdb510dddf0802dafe.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={
+"md5": "fedcb5cbf37fe21a68985849e8493c5b"
+}
+
+[deps]
+
+source_file="res://Art/Models/explorer_steel_normal.png"
+dest_files=["res://.godot/imported/explorer_steel_normal.png-ceac6d7b889adcbdb510dddf0802dafe.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

@@ -1,0 +1,4 @@
+Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
+OpenGL API 4.1 Metal - 89.4 - Compatibility - Using Device: Apple - Apple M2
+ 
+RENDER PERFORMANCE: 84.2578289566072 frames/s average; 7.121 seconds; objects 348

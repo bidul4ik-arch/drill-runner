@@ -1,0 +1,50 @@
+{
+  "explorer": {
+    "vertices": 22380,
+    "triangles": 42624
+  },
+  "track": {
+    "vertices": 24936,
+    "triangles": 46556
+  },
+  "crystal_track": {
+    "vertices": 25772,
+    "triangles": 48004
+  },
+  "industrial_track": {
+    "vertices": 30598,
+    "triangles": 58260
+  },
+  "mining_robot": {
+    "vertices": 15992,
+    "triangles": 31392
+  },
+  "crystal_guardian": {
+    "vertices": 9539,
+    "triangles": 18698
+  },
+  "giant_drill": {
+    "vertices": 39288,
+    "triangles": 76668
+  },
+  "drill_attack": {
+    "vertices": 836,
+    "triangles": 1660
+  },
+  "crate": {
+    "vertices": 1320,
+    "triangles": 2568
+  },
+  "cart": {
+    "vertices": 760,
+    "triangles": 1404
+  },
+  "pipe": {
+    "vertices": 456,
+    "triangles": 836
+  },
+  "home": {
+    "vertices": 18663,
+    "triangles": 35698
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "bones": 15,
+  "clips": {
+    "idle": 60,
+    "run": 24,
+    "sprint": 20,
+    "jump": 24,
+    "fall": 24,
+    "land": 8,
+    "slide": 24,
+    "lane_left": 8,
+    "lane_right": 8,
+    "lane": 8,
+    "boost": 18,
+    "hit": 30,
+    "victory": 60
+  },
+  "triangles": 108360
+}

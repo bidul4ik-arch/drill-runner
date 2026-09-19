@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="DrillDrop"
+run/main_scene="res://Scenes/Screens/MainMenu.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=960
+window/size/window_width_override=640
+window/size/window_height_override=960
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[filesystem]
+
+import/blender/enabled=false
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d.mobile=1
+
+renderer/rendering_method="forward_plus"
+renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=2
+
+[autoload]
+Locale="*res://Script/Services/Locale.gd"
+Profile="*res://Script/Services/Profile.gd"
+Flow="*res://Script/Services/Flow.gd"
+StoreBridge="*res://Script/Services/StoreBridge.gd"

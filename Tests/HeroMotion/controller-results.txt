@@ -1,0 +1,4 @@
+Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
+Vulkan API 1.2.231 - Forward+ - Using Vulkan Device #0: Apple - Apple M2
+ 
+HERO CONTROLLER: 0 failures

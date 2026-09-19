@@ -1,0 +1,98 @@
+<string>:11: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+/Users/ilyadendy/Downloads/drill-runner-main/DrillDropDev/Tools/build_reference_assets.py:14: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m.diffuse_color=(*color,1);m.use_nodes=True;n=m.node_tree.nodes;n.clear()
+INFO Draco is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+14:43:02 | INFO: Starting glTF 2.0 export
+14:43:02 | INFO: Extracting primitive: Jacket articulated sleeve
+14:43:02 | INFO: Primitives created: 1
+14:43:02 | INFO: Extracting primitive: Jacket articulated sleeve.001
+14:43:02 | INFO: Primitives created: 1
+14:43:02 | INFO: Extracting primitive: Forearm anatomy
+14:43:02 | INFO: Primitives created: 7
+14:43:02 | INFO: Extracting primitive: Forearm anatomy.001
+14:43:02 | INFO: Primitives created: 7
+14:43:02 | INFO: Extracting primitive: Shirt
+14:43:03 | INFO: Primitives created: 18
+14:43:03 | INFO: Extracting primitive: Trouser gathered calf
+14:43:03 | INFO: Primitives created: 7
+14:43:03 | INFO: Extracting primitive: Trouser gathered calf.001
+14:43:03 | INFO: Primitives created: 7
+14:43:03 | INFO: Extracting primitive: Cargo thigh
+14:43:03 | INFO: Primitives created: 4
+14:43:03 | INFO: Extracting primitive: Cargo thigh.001
+14:43:03 | INFO: Primitives created: 4
+14:43:03 | INFO: Finished glTF 2.0 export in 0.43789005279541016 s
+
+14:43:24 | INFO: Starting glTF 2.0 export
+14:43:24 | INFO: Extracting primitive: Куб.077
+14:43:24 | INFO: Primitives created: 12
+14:43:24 | INFO: Finished glTF 2.0 export in 0.17705988883972168 s
+
+14:43:47 | INFO: Starting glTF 2.0 export
+14:43:47 | INFO: Extracting primitive: Куб.352
+14:43:47 | INFO: Primitives created: 13
+14:43:47 | INFO: Finished glTF 2.0 export in 0.17184066772460938 s
+
+14:44:04 | INFO: Starting glTF 2.0 export
+14:44:04 | INFO: Extracting primitive: Куб.627
+14:44:05 | INFO: Primitives created: 13
+14:44:05 | INFO: Finished glTF 2.0 export in 0.17310881614685059 s
+
+14:44:05 | INFO: Starting glTF 2.0 export
+14:44:05 | INFO: Extracting primitive: Конус.953
+14:44:05 | INFO: Primitives created: 6
+14:44:05 | INFO: Extracting primitive: Конус.895
+14:44:05 | INFO: Primitives created: 8
+14:44:05 | INFO: Extracting primitive: Конус.966
+14:44:05 | INFO: Primitives created: 6
+14:44:06 | INFO: Finished glTF 2.0 export in 0.2730989456176758 s
+
+14:44:06 | INFO: Starting glTF 2.0 export
+14:44:06 | INFO: Extracting primitive: Конус.979
+14:44:06 | INFO: Primitives created: 8
+14:44:06 | INFO: Extracting primitive: Shoulder carved arch
+14:44:06 | INFO: Primitives created: 8
+14:44:06 | INFO: Extracting primitive: Shoulder carved arch.001
+14:44:06 | INFO: Primitives created: 8
+14:44:06 | INFO: Finished glTF 2.0 export in 0.2264561653137207 s
+
+14:44:15 | INFO: Starting glTF 2.0 export
+14:44:15 | INFO: Extracting primitive: Конус.1182
+14:44:15 | INFO: Primitives created: 5
+14:44:15 | INFO: Extracting primitive: Конус.1201
+14:44:15 | INFO: Primitives created: 5
+14:44:15 | INFO: Extracting primitive: Куб.895
+14:44:15 | INFO: Primitives created: 7
+14:44:15 | INFO: Finished glTF 2.0 export in 0.26023006439208984 s
+
+14:44:15 | INFO: Starting glTF 2.0 export
+14:44:15 | INFO: Extracting primitive: Конус.1220
+14:44:15 | INFO: Primitives created: 1
+14:44:15 | INFO: Finished glTF 2.0 export in 0.0212860107421875 s
+
+14:44:15 | INFO: Starting glTF 2.0 export
+14:44:15 | INFO: Extracting primitive: Куб.1158
+14:44:15 | INFO: Primitives created: 3
+14:44:15 | INFO: Finished glTF 2.0 export in 0.05668210983276367 s
+
+14:44:15 | INFO: Starting glTF 2.0 export
+14:44:15 | INFO: Extracting primitive: Куб.1171
+14:44:15 | INFO: Primitives created: 4
+14:44:15 | INFO: Finished glTF 2.0 export in 0.04092693328857422 s
+
+14:44:15 | INFO: Starting glTF 2.0 export
+14:44:15 | INFO: Extracting primitive: Куб.1180
+14:44:15 | INFO: Primitives created: 4
+14:44:15 | INFO: Finished glTF 2.0 export in 0.055290937423706055 s
+
+14:44:22 | INFO: Starting glTF 2.0 export
+14:44:22 | INFO: Extracting primitive: Куб.1184
+14:44:22 | INFO: Primitives created: 14
+14:44:22 | INFO: Finished glTF 2.0 export in 0.18321633338928223 s
+
+Информация: Сохранено как "reference_revision.blend"
+REFERENCE REVISION COMPLETE {"explorer": {"vertices": 22380, "triangles": 42624}, "track": {"vertices": 24936, "triangles": 46556}, "crystal_track": {"vertices": 25772, "triangles": 48004}, "industrial_track": {"vertices": 30598, "triangles": 58260}, "mining_robot": {"vertices": 15992, "triangles": 31392}, "crystal_guardian": {"vertices": 9539, "triangles": 18698}, "giant_drill": {"vertices": 39288, "triangles": 76668}, "drill_attack": {"vertices": 836, "triangles": 1660}, "crate": {"vertices": 1320, "triangles": 2568}, "cart": {"vertices": 760, "triangles": 1404}, "pipe": {"vertices": 456, "triangles": 836}, "home": {"vertices": 18663, "triangles": 35698}}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

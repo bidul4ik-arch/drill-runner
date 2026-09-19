@@ -1,0 +1,5 @@
+Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
+ 
+ANIMATIONS: ["hit", "idle", "jump", "land", "lane", "run", "slide"]
+POOL NODES: 824 -> 824
+TEST RESULT: 0 failures; 30 minutes simulated; 5 restarts

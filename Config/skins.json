@@ -1,0 +1,34 @@
+[
+  {
+    "id": "explorer",
+    "name": "Исследователь",
+    "currency": "coins",
+    "price": 0,
+    "jacket": "bc812e",
+    "pack": "28666e"
+  },
+  {
+    "id": "cave",
+    "name": "Спелеолог",
+    "currency": "coins",
+    "price": 120,
+    "jacket": "5396b3",
+    "pack": "513d73"
+  },
+  {
+    "id": "engineer",
+    "name": "Инженер",
+    "currency": "coins",
+    "price": 280,
+    "jacket": "ba5139",
+    "pack": "3b454c"
+  },
+  {
+    "id": "aurora",
+    "name": "Аврора",
+    "currency": "coins",
+    "price": 450,
+    "jacket": "8663c7",
+    "pack": "276d72"
+  }
+]

@@ -1,0 +1,15 @@
+.godot/
+*.blend1
+.DS_Store
+Builds/
+.android/
+android/build/
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+.env
+.env.*
+__pycache__/
+*.pyc
+Tests/**/Frames/

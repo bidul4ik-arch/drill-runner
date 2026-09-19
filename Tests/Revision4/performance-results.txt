@@ -1,0 +1,6 @@
+Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
+Vulkan API 1.2.231 - Forward+ - Using Vulkan Device #0: Apple - Apple M2
+ 
+LEVEL 1 BOSS FPS 57.5594781273983 node count 564
+LEVEL 2 BOSS FPS 59.0551181102362 node count 564
+LEVEL 3 BOSS FPS 59.0667454223272 node count 570
