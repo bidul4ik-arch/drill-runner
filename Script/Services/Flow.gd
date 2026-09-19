@@ -2,6 +2,8 @@ extends Node
 var busy := false
 var resume_checkpoint := false
 var resume_run := false
+func _ready() -> void:
+	get_tree().quit_on_go_back=false
 func go(path: String) -> void:
 	if busy: return
 	busy=true

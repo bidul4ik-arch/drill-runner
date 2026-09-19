@@ -40,6 +40,7 @@ anti_aliasing/quality/msaa_3d=2
 
 [autoload]
 Locale="*res://Script/Services/Locale.gd"
+Banter="*res://Script/Services/Banter.gd"
 Profile="*res://Script/Services/Profile.gd"
 Flow="*res://Script/Services/Flow.gd"
 StoreBridge="*res://Script/Services/StoreBridge.gd"

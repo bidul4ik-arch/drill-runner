@@ -248,6 +248,10 @@ func save_progress() -> void:
 	Profile.data.effects=effects_volume
 	Profile.save()
 func _notification(what: int) -> void:
+	if what==NOTIFICATION_WM_GO_BACK_REQUEST:
+		if state in ["run","boss","pause"]:toggle_pause()
+		elif state=="settings":_return_to_pause()
+		else:Flow.go("res://Scenes/Screens/MainMenu.tscn")
 	if what in [NOTIFICATION_APPLICATION_FOCUS_OUT,NOTIFICATION_APPLICATION_PAUSED]:
 		if state in ["run","boss"]: toggle_pause()
 		Profile.save()
@@ -277,7 +281,13 @@ func restart_level() -> void:
 func comic_hit(word: String) -> void:
 	var impact=preload("res://Script/UI/ComicImpact.gd").new()
 	impact.word=word
+	impact.caption=Banter.take("boss_"+str(level_id))
 	impact.position=camera.unproject_position(boss.model.global_position+Vector3(0,2.5,0))-Vector2(95,55)
 	impact.position.x=clampf(impact.position.x,20,430)
 	impact.position.y=clampf(impact.position.y,180,600)
+	var old_comic=pause_button.get_parent().get_node_or_null("ComicCallout")
+	if old_comic:
+		pause_button.get_parent().remove_child(old_comic)
+		old_comic.queue_free()
+	impact.name="ComicCallout"
 	pause_button.get_parent().add_child(impact)

@@ -3,6 +3,8 @@ var game: Node
 var shield: MeshInstance3D
 var magnet: Node3D
 var pickup_flash: CPUParticles3D
+var foot_dust: CPUParticles3D
+var motes: CPUParticles3D
 var dust: CPUParticles3D
 var chips: Array[MeshInstance3D]=[]
 var motion:=0.0
@@ -28,6 +30,24 @@ func _ready() -> void:
 	dust.direction=Vector3(0,0,1);dust.spread=12;dust.gravity=Vector3(0,-.4,0);dust.initial_velocity_min=10;dust.initial_velocity_max=19;dust.scale_amount_min=.22;dust.scale_amount_max=.65
 	var quad:=QuadMesh.new();quad.size=Vector2.ONE;dust.mesh=quad
 	var dm:=material(Color(.83,.64,.36,.3));dm.albedo_texture=preload("res://Art/Textures/dust_puff.png");dm.vertex_color_use_as_albedo=true;dm.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;dm.billboard_mode=BaseMaterial3D.BILLBOARD_ENABLED;dm.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;dust.material_override=dm;dust.emitting=false
+	var fade:=Gradient.new()
+	fade.offsets=PackedFloat32Array([0,.18,1])
+	fade.colors=PackedColorArray([Color(1,1,1,0),Color(1,1,1,.55),Color(1,1,1,0)])
+	dust.color_ramp=fade
+	var growth:=Curve.new();growth.add_point(Vector2(0,.3));growth.add_point(Vector2(1,1))
+	dust.scale_amount_curve=growth
+	foot_dust=CPUParticles3D.new();add_child(foot_dust)
+	foot_dust.amount=20;foot_dust.lifetime=.55;foot_dust.mesh=quad;foot_dust.material_override=dm
+	foot_dust.color_ramp=fade;foot_dust.scale_amount_curve=growth
+	foot_dust.emission_shape=CPUParticles3D.EMISSION_SHAPE_SPHERE;foot_dust.emission_sphere_radius=.18
+	foot_dust.direction=Vector3(0,.15,1);foot_dust.spread=22;foot_dust.gravity=Vector3(0,.15,0)
+	foot_dust.initial_velocity_min=1;foot_dust.initial_velocity_max=3
+	foot_dust.scale_amount_min=.16;foot_dust.scale_amount_max=.42;foot_dust.emitting=false
+	motes=CPUParticles3D.new();add_child(motes)
+	motes.amount=22;motes.lifetime=3;motes.mesh=spark;motes.material_override=material(Color("ffd6a0"),true)
+	motes.color_ramp=fade;motes.emission_shape=CPUParticles3D.EMISSION_SHAPE_BOX;motes.emission_box_extents=Vector3(4,2.5,10)
+	motes.position=Vector3(0,2.5,-9);motes.direction=Vector3(0,0,1);motes.gravity=Vector3.ZERO
+	motes.initial_velocity_min=1;motes.initial_velocity_max=3;motes.scale_amount_min=.008;motes.scale_amount_max=.018
 	var chip_mesh:=PrismMesh.new();chip_mesh.size=Vector3(.10,.16,.11)
 	var stone:=material(Color("98704b"))
 	for i in 28:
@@ -40,7 +60,12 @@ func burst(at: Vector3, color: Color) -> void:
 func tick(delta: float) -> void:
 	var active: bool=game.state in ["run","boss"]
 	dust.speed_scale=1.0 if active else 0.0;pickup_flash.speed_scale=dust.speed_scale
+	foot_dust.speed_scale=dust.speed_scale;motes.speed_scale=dust.speed_scale
 	if not active:return
+	foot_dust.position=game.drill.position+Vector3(0,.09,.15)
+	foot_dust.emitting=game.drill.position.y<.15
+	foot_dust.initial_velocity_max=game.run_speed()*.22
+	motes.initial_velocity_max=game.run_speed()*.5
 	motion+=delta
 	shield.visible=game.shield_left>0;shield.position=game.drill.position+Vector3(0,1.0,0)
 	magnet.visible=game.magnet_left>0;magnet.position=game.drill.position+Vector3(0,1,0);magnet.rotation.y=motion*2;magnet.rotation.x=sin(motion*2)*.22
@@ -53,4 +78,4 @@ func tick(delta: float) -> void:
 			if chip.position.z>4 or chip.position.y<-.2:reset_chip(chip)
 	for chunk in game.belt.chunks:
 		var decor: Node3D=chunk.get_child(0)
-		decor.rotation.z=sin(motion*17+chunk.position.z)*.0025*collapse_strength
+		decor.rotation.z=sin(motion*17+chunk.position.z)*.0008*collapse_strength

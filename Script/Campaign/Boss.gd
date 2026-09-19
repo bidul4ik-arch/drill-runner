@@ -201,7 +201,7 @@ func try_boost() -> bool:
 	recoil=.4
 	play("hurt")
 	if anim: anim.seek(0,true)
-	game.comic_hit([tr("БАМ!"),tr("ХРЯСЬ!"),tr("КРРРАК!")][combo_step-1])
+	game.comic_hit(Banter.take("impact"))
 	game.boss_message(tr("БУР · ")+"●".repeat(combo_step)+"○".repeat(3-combo_step))
 	game.sfx("boss_hit")
 	Profile.buzz()

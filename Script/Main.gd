@@ -363,6 +363,17 @@ func collect_coin() -> void:
 	flash.color = Color(1,.75,.2,.08)
 	sfx("coin")
 func powerup(key: String) -> void:
+	var comic=preload("res://Script/UI/ComicImpact.gd").new()
+	comic.word=tr("ЩИТ!") if key=="shield" else tr("МАГНИТ!")
+	comic.caption=Banter.take(key)
+	comic.tint=Color("55dfff") if key=="shield" else Color("d58cff")
+	comic.position=Vector2(get_viewport().get_visible_rect().size.x*.5-95,get_viewport().get_visible_rect().size.y*.34)
+	var old_comic=pause_button.get_parent().get_node_or_null("ComicCallout")
+	if old_comic:
+		pause_button.get_parent().remove_child(old_comic)
+		old_comic.queue_free()
+	comic.name="ComicCallout"
+	pause_button.get_parent().add_child(comic)
 	if key == "shield": shield_left = 12
 	else: magnet_left = 10
 	fx_left = .5

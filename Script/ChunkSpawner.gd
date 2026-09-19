@@ -12,6 +12,8 @@ var chunks: Array[Node3D] = []
 var rng := RandomNumberGenerator.new()
 var safe_lane := 0
 var rows := 0
+var next_pickup_row := 12
+var pickup_rules: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://Config/pickups.json"))
 var game: Node
 
 func _ready() -> void:
@@ -48,15 +50,20 @@ func _ready() -> void:
 			coins.append(coin)
 		c.set_meta("coins", coins)
 		for key in ["shield", "magnet"]:
-			var p: Node3D = load("res://Scenes/Props/" + key + ".tscn").instantiate()
+			var p := Sprite3D.new()
+			p.texture=load("res://Art/UI/Pickups/"+key+".svg")
+			p.pixel_size=.006
+			p.double_sided=true
+			p.shaded=false
 			p.name = key
-			p.scale=Vector3.ONE*.38
+			p.scale=Vector3.ONE
 			c.add_child(p)
 		chunks.append(c)
 	reset()
 
 func reset() -> void:
 	rows = 0
+	next_pickup_row=rng.randi_range(int(pickup_rules.first_minimum_row),int(pickup_rules.first_maximum_row))
 	safe_lane = 0
 	for i in COUNT:
 		chunks[i].position.z = 12 - i * LENGTH
@@ -91,9 +98,13 @@ func populate(c: Node3D, empty: bool = false) -> void:
 		coin.position = Vector3(safe_lane * 2.5, 1.0, 6 - j * 2.3)
 		coin.visible = not empty and random_enabled
 		j += 1
+	var selected := ""
+	if not empty and random_enabled and rows>=next_pickup_row:
+		selected="shield" if rng.randf()<.5 else "magnet"
+		next_pickup_row=rows+rng.randi_range(int(pickup_rules.minimum_gap_rows),int(pickup_rules.maximum_gap_rows))
 	for key in ["shield", "magnet"]:
 		var p := c.get_node(key) as Node3D
-		p.visible = not empty and random_enabled and rows % 5 == (0 if key == "shield" else 2)
+		p.visible = key==selected
 		p.position = Vector3(safe_lane * 2.5, 1.1, -8)
 
 func tick(delta: float, speed: float) -> void:
@@ -123,13 +134,14 @@ func tick(delta: float, speed: float) -> void:
 			if magnetic:
 				coin.set_meta("attracting",true)
 				coin.global_position=(p-Vector3(0,0,speed*delta)).move_toward(target,25*delta)
-			if (magnetic and coin.global_position.distance_to(target)<.45) or (absf(p.x - game.drill.position.x) < .85 and absf(p.z) < .8 and game.drill.position.y < 1.6):
+			if (magnetic and coin.global_position.distance_to(target)<.45) or (absf(p.x - game.drill.position.x) < .85 and p.z>=-.8 and p.z-speed*delta<=.8 and game.drill.position.y < 1.6):
 				coin.visible = false
 				game.collect_coin()
 		for key in ["shield", "magnet"]:
 			var p := c.get_node(key) as Node3D
-			p.rotation.y += delta
-			if p.visible and absf(p.global_position.z) < 1 and absf(p.global_position.x - game.drill.position.x) < 1 and game.drill.position.y < 1.6:
+			p.rotation.y = sin(motion_time*1.7)*.35
+			p.position.y=1.0+sin(motion_time*2.6)*.09
+			if p.visible and old_z+p.position.z<=1 and c.position.z+p.position.z>=-1 and absf(p.global_position.x - game.drill.position.x) < 1 and game.drill.position.y < 1.6:
 				p.visible = false
 				game.powerup(key)
 		if c.position.z > 30:

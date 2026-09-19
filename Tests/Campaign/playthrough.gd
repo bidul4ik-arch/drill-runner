@@ -29,6 +29,7 @@ func solve(game) -> void:
 					if int(b.pattern[1])==0: game.drill.jump()
 					elif int(b.pattern[1])==1: game.drill.slide()
 func run() -> void:
+	if not "--test" in OS.get_cmdline_user_args():get_tree().quit(2);return
 	Profile.data.unlocked=1
 	Profile.data.completed=[]
 	Profile.data.claimed=[]
