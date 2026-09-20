@@ -1,0 +1,10 @@
+{
+  "Builds/Android/DrillDrop.apk": {
+    "bytes": 92199429,
+    "sha256": "7fb859c7ffa771874fcbe2b2534252ab78f2940371a1a390fc4f592764d373e8"
+  },
+  "Builds/DrillDrop.zip": {
+    "bytes": 118609207,
+    "sha256": "cbef8d4c25d9cd4d9c4929f21a5084e0e653e78087d605b3e489777e9c626fa1"
+  }
+}
