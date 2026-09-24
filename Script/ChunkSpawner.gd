@@ -31,8 +31,8 @@ func _ready() -> void:
 			var lantern := OmniLight3D.new()
 			lantern.position = Vector3(side * 3.58, 2.65, 6)
 			lantern.light_color = Color("ffb34e")
-			lantern.light_energy = 1.1
-			lantern.omni_range = 6.0
+			lantern.light_energy = .9 if preload("res://Script/Services/Graphics.gd").renderer()=="gl_compatibility" else 2.0
+			lantern.omni_range = 7.0
 			c.add_child(lantern)
 		var hazards: Array[Node3D] = []
 		for lane in 3:

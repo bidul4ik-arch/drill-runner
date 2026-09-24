@@ -1,0 +1,14 @@
+{
+  "track": {
+    "vertices": 32550,
+    "triangles": 62280
+  },
+  "crystal_track": {
+    "vertices": 33386,
+    "triangles": 63728
+  },
+  "industrial_track": {
+    "vertices": 37572,
+    "triangles": 72704
+  }
+}

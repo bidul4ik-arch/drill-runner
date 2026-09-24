@@ -29,7 +29,9 @@ func _ready() -> void:
 	dust=CPUParticles3D.new();add_child(dust);dust.amount=32;dust.lifetime=1.2;dust.emission_shape=CPUParticles3D.EMISSION_SHAPE_BOX;dust.emission_box_extents=Vector3(4,2,7);dust.position=Vector3(0,2,-5)
 	dust.direction=Vector3(0,0,1);dust.spread=12;dust.gravity=Vector3(0,-.4,0);dust.initial_velocity_min=10;dust.initial_velocity_max=19;dust.scale_amount_min=.22;dust.scale_amount_max=.65
 	var quad:=QuadMesh.new();quad.size=Vector2.ONE;dust.mesh=quad
-	var dm:=material(Color(.83,.64,.36,.3));dm.albedo_texture=preload("res://Art/Textures/dust_puff.png");dm.vertex_color_use_as_albedo=true;dm.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;dm.billboard_mode=BaseMaterial3D.BILLBOARD_ENABLED;dm.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;dust.material_override=dm;dust.emitting=false
+	var dm:=ShaderMaterial.new();dm.shader=preload("res://Art/Textures/dust.gdshader")
+	dm.set_shader_parameter("dust_texture",preload("res://Art/Textures/dust_puff.png"))
+	quad.material=dm;dust.material_override=dm;dust.emitting=false
 	var fade:=Gradient.new()
 	fade.offsets=PackedFloat32Array([0,.18,1])
 	fade.colors=PackedColorArray([Color(1,1,1,0),Color(1,1,1,.55),Color(1,1,1,0)])
@@ -48,6 +50,9 @@ func _ready() -> void:
 	motes.color_ramp=fade;motes.emission_shape=CPUParticles3D.EMISSION_SHAPE_BOX;motes.emission_box_extents=Vector3(4,2.5,10)
 	motes.position=Vector3(0,2.5,-9);motes.direction=Vector3(0,0,1);motes.gravity=Vector3.ZERO
 	motes.initial_velocity_min=1;motes.initial_velocity_max=3;motes.scale_amount_min=.008;motes.scale_amount_max=.018
+	# Billboard dust and sparks must not cast solid rectangular shadows.
+	for particles in [dust,foot_dust,pickup_flash,motes]:
+		particles.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var chip_mesh:=PrismMesh.new();chip_mesh.size=Vector3(.10,.16,.11)
 	var stone:=material(Color("98704b"))
 	for i in 28:

@@ -18,7 +18,7 @@ func _ready() -> void:
 	Engine.max_fps=60 if int(Profile.data.quality)==1 else 30
 	for light in find_children("*","DirectionalLight3D",true,false): light.shadow_enabled=int(Profile.data.quality)==1
 	for world in find_children("*","WorldEnvironment",true,false):
-		world.environment.ssao_enabled=int(Profile.data.quality)==1 and ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method")=="forward_plus"
+		world.environment.ssao_enabled=int(Profile.data.quality)==1 and preload("res://Script/Services/Graphics.gd").renderer()=="forward_plus"
 		world.environment.fog_light_color=Color(definition.fog)
 		world.environment.background_color=Color(definition.fog)
 		world.environment.ambient_light_color=Color(definition.ambient)

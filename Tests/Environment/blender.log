@@ -1,0 +1,24 @@
+/Users/ilyadendy/Downloads/drill-runner-main/DrillDropDev/Tools/build_environment_polish.py:18: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m=bpy.data.materials.new('Environment / '+name);m.use_nodes=True;m.diffuse_color=(*color,1)
+INFO Draco is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+21:05:44 | INFO: Starting glTF 2.0 export
+21:05:44 | INFO: Extracting primitive: Куб
+21:05:44 | INFO: Primitives created: 17
+21:05:44 | INFO: Finished glTF 2.0 export in 0.07843303680419922 s
+
+21:06:00 | INFO: Starting glTF 2.0 export
+21:06:00 | INFO: Extracting primitive: Куб.343
+21:06:00 | INFO: Primitives created: 18
+21:06:00 | INFO: Finished glTF 2.0 export in 0.06249094009399414 s
+
+21:06:12 | INFO: Starting glTF 2.0 export
+21:06:12 | INFO: Extracting primitive: Куб.686
+21:06:12 | INFO: Primitives created: 17
+21:06:12 | INFO: Finished glTF 2.0 export in 0.06906294822692871 s
+
+Информация: Сохранено как "environment_polish.blend"
+ENVIRONMENT_BUILD_OK {'track': {'vertices': 32550, 'triangles': 62280}, 'crystal_track': {'vertices': 33386, 'triangles': 63728}, 'industrial_track': {'vertices': 37572, 'triangles': 72704}}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

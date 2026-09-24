@@ -28,10 +28,10 @@ func _ready() -> void:
 	env.ambient_light_color=Color("e4d4af")
 	env.ambient_light_energy=.4
 	env.tonemap_mode=Environment.TONE_MAPPER_FILMIC
-	env.ssao_enabled=ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method")=="forward_plus"
+	env.ssao_enabled=preload("res://Script/Services/Graphics.gd").renderer()=="forward_plus"
 	env.ssao_radius=.5
 	env.ssao_intensity=1.5
-	env.glow_enabled=ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method")!="gl_compatibility"
+	env.glow_enabled=preload("res://Script/Services/Graphics.gd").renderer()!="gl_compatibility"
 	world.environment=env
 	add_child(world)
 	var room: Node3D=load("res://Art/Models/home.glb" if screen=="home" else "res://Art/Models/track.glb").instantiate()

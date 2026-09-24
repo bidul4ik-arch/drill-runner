@@ -47,7 +47,7 @@ func _ready() -> void:
 	env.fog_density = .0045
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color("d5c6ae")
-	env.ambient_light_energy = .22
+	env.ambient_light_energy = .48
 	var reflection_sky := Sky.new()
 	var sky_material := ProceduralSkyMaterial.new()
 	sky_material.sky_top_color = Color("637c85")
@@ -59,11 +59,11 @@ func _ready() -> void:
 	env.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.tonemap_exposure = 1.1
-	env.ssao_enabled = ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method")=="forward_plus"
+	env.ssao_enabled = preload("res://Script/Services/Graphics.gd").renderer()=="forward_plus"
 	env.ssao_radius = .7
 	env.ssao_intensity = 1.6
 	env.ssao_detail = 1.5
-	env.glow_enabled = ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method")!="gl_compatibility"
+	env.glow_enabled = preload("res://Script/Services/Graphics.gd").renderer()!="gl_compatibility"
 	env.glow_intensity = .55
 	env.glow_bloom = .08
 	var world := WorldEnvironment.new()
@@ -71,8 +71,8 @@ func _ready() -> void:
 	add_child(world)
 	var sun := DirectionalLight3D.new()
 	sun.rotation_degrees = Vector3(-48,-30,0)
-	sun.light_color = Color("ffd398")
-	sun.light_energy = 1.15
+	sun.light_color = Color("ffe7ce")
+	sun.light_energy = .38 if preload("res://Script/Services/Graphics.gd").renderer()=="gl_compatibility" else .65
 	sun.shadow_enabled = true
 	sun.shadow_bias = .10
 	sun.shadow_normal_bias = 2.0
@@ -89,7 +89,7 @@ func _ready() -> void:
 	hero_key.position = Vector3(2.3,4.2,3.3)
 	hero_key.omni_range = 9.0
 	hero_key.light_color = Color("ffe4bb")
-	hero_key.light_energy = 2.0
+	hero_key.light_energy = 1.2
 	add_child(hero_key)
 	setup_audio()
 	setup_ui()
