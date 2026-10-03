@@ -29,6 +29,9 @@ func _ready() -> void:
 	add_child(atmosphere)
 	atmosphere.finished.connect(func(): atmosphere.play())
 	atmosphere.play()
+	if Flow.auto_start:
+		Flow.auto_start=false
+		call_deferred("start_run")
 	apply_volume()
 	var root: Control=pause_button.get_parent()
 	boss_label=Label.new()
@@ -94,6 +97,7 @@ func start_run() -> void:
 	super.start_run()
 	run_id=str(Time.get_unix_time_from_system())+"-"+str(randi())
 	rewarded=false
+	if not (Flow.resume_run and not Profile.data.suspended_run.is_empty()):Goals.record("runs")
 	if Flow.resume_run and not Profile.data.suspended_run.is_empty() and int(Profile.data.suspended_run.level)==level_id:
 		var snapshot: Dictionary=Profile.data.suspended_run
 		distance=float(snapshot.distance)
@@ -181,7 +185,9 @@ func victory() -> void:
 	var reward:=int(definition.reward)+coins
 	if not rewarded:
 		Profile.data.suspended_run={}
+		Profile.data.best=maxi(int(Profile.data.best),score())
 		rewarded=Profile.reward(run_id,level_id,reward)
+		if rewarded:Goals.record("bosses");Profile.save()
 	clear_panel()
 	pause_button.hide()
 	boost_button.hide()

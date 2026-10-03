@@ -13,6 +13,12 @@ var shop_catalog := false
 var page := ""
 var menu_music: AudioStreamPlayer
 var click_audio: AudioStreamPlayer
+var lobby: Control
+var lobby_art: TextureRect
+var wallet_label: Label
+var reward_badge: Button
+var daily_badge: Button
+var reward_modal: PanelContainer
 func _ready() -> void:
 	menu_music=AudioStreamPlayer.new();add_child(menu_music)
 	menu_music.stream=preload("res://Audio/music.wav");menu_music.pitch_scale=.85
@@ -78,19 +84,23 @@ func _ready() -> void:
 	root.add_child(atmosphere)
 	atmosphere.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.theme=menu_theme()
-	var brand:=Label.new()
-	root.add_child(brand)
-	brand.text="DRILLDROP"
-	brand.position=Vector2(26,26)
-	brand.add_theme_font_size_override("font_size",42)
-	brand.add_theme_color_override("font_color",Color("ffdb72"))
-	brand.add_theme_constant_override("outline_size",8)
-	brand.add_theme_color_override("font_outline_color",Color("122a35"))
-	var sub:=Label.new()
-	root.add_child(sub)
-	sub.text=tr("КРИСТАЛЬНЫЙ РЕЙС")
-	sub.position=Vector2(29,78)
-	sub.add_theme_font_size_override("font_size",14)
+	lobby_art=TextureRect.new();root.add_child(lobby_art);root.move_child(lobby_art,0)
+	lobby_art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	lobby_art.texture=load("res://Art/UI/Lobby/menu.png")
+	lobby_art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	lobby_art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;lobby_art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	lobby_art.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	var top:=HBoxContainer.new();root.add_child(top)
+	top.anchor_right=1;top.offset_left=18;top.offset_top=18;top.offset_right=-18;top.offset_bottom=76
+	var back:=Button.new();back.icon=preload("res://Art/UI/Nav/menu.svg");back.custom_minimum_size=Vector2(58,58);top.add_child(back)
+	back.pressed.connect(func():navigate("menu"))
+	var purse_center:=CenterContainer.new();purse_center.size_flags_horizontal=Control.SIZE_EXPAND_FILL;top.add_child(purse_center)
+	var purse:=HBoxContainer.new();purse_center.add_child(purse)
+	var token:=TextureRect.new();token.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;token.texture=preload("res://Art/UI/token.svg");token.custom_minimum_size=Vector2(32,32);token.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;purse.add_child(token)
+	wallet_label=Label.new();wallet_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	wallet_label.add_theme_color_override("font_outline_color",Color("142d3c"));wallet_label.add_theme_font_size_override("font_size",27);wallet_label.add_theme_constant_override("outline_size",6);purse.add_child(wallet_label)
+	var gear:=Button.new();gear.icon=preload("res://Art/UI/Nav/settings.svg");gear.custom_minimum_size=Vector2(58,58);top.add_child(gear);gear.pressed.connect(settings)
+	Profile.changed.connect(update_lobby);Goals.updated.connect(_goals_updated)
 	sheet = PanelContainer.new()
 	root.add_child(sheet)
 	sheet.anchor_top=.46
@@ -118,18 +128,28 @@ func _ready() -> void:
 	var dock:=HBoxContainer.new()
 	root.add_child(dock)
 	dock.anchor_top=1;dock.anchor_bottom=1;dock.anchor_right=1
-	dock.offset_left=18;dock.offset_right=-18;dock.offset_top=-92;dock.offset_bottom=-18
+	dock.offset_left=18;dock.offset_right=-18;dock.offset_top=-106;dock.offset_bottom=-18
 	dock.add_theme_constant_override("separation",8)
-	for item in [["Главная", "menu"],["Уровни","levels"],["Магазин","shop"],["Домик","home"]]:
-		var tab:=Button.new();tab.text=tr(item[0]);tab.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	for item in [["Задания", "missions"],["Домик","home"],["Магазин","shop"],["Награды","achievements"]]:
+		var tab:=Button.new();tab.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		dock.add_child(tab)
 		var target: String=item[1]
 		nav_buttons[target]=tab
-		tab.icon=load("res://Art/UI/Nav/"+target+".svg")
+		var stack:=VBoxContainer.new();tab.add_child(stack);stack.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);stack.offset_top=8;stack.offset_bottom=-6;stack.mouse_filter=Control.MOUSE_FILTER_IGNORE
+		var icon:=TextureRect.new();icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.texture=load("res://Art/UI/Nav/"+target+".svg");icon.custom_minimum_size.y=38;icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;icon.mouse_filter=Control.MOUSE_FILTER_IGNORE;stack.add_child(icon)
+		var caption:=Label.new();caption.text=tr(item[0]);caption.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;caption.add_theme_font_size_override("font_size",17);caption.mouse_filter=Control.MOUSE_FILTER_IGNORE;stack.add_child(caption)
 		tab.add_theme_font_size_override("font_size",16)
 		tab.pressed.connect(func(): click_audio.play();navigate(target))
+	build_lobby(root)
+	if screen=="menu" and not Flow.menu_page.is_empty():screen=Flow.menu_page;Flow.menu_page=""
 	show_page()
 func clear() -> void:
+	if lobby:lobby.visible=page=="menu"
+	if lobby_art:lobby_art.visible=page in ["menu","missions","achievements","settings"]
+	sheet.visible=page!="menu"
+	for model in get_children():
+		if model is Node3D and not model is Camera3D:model.visible=not lobby_art.visible
+	update_lobby()
 	var active: String="home" if page=="wardrobe" else "menu" if page=="settings" else page
 	for key in nav_buttons:
 		nav_buttons[key].add_theme_stylebox_override("normal",panel_style(Color("32606a") if key==active else Color("204956"),Color("ffdb72") if key==active else Color("507985")))
@@ -168,16 +188,9 @@ func show_page() -> void:
 	wallet()
 	match screen:
 		"menu":
-			text(tr("Твой следующий забег"),20)
-			button(tr("Играть")+"  ▶",func():
-				var id:=int(Profile.data.checkpoint)
-				Flow.start_level(id if id>0 else int(Profile.data.last_level),id>0,true))
-			var play_button=ui.get_child(ui.get_child_count()-1)
-			play_button.add_theme_color_override("font_color",Color("152f38"))
-			play_button.add_theme_stylebox_override("normal",panel_style(Color("ffd467"),Color("ffedaa")))
-			play_button.custom_minimum_size.y=72
-			button(tr("Бесконечный режим"),func(): Flow.go("res://Scenes/Levels/Endless.tscn"))
-			button(tr("Настройки"),settings)
+			pass
+		"missions","achievements":
+			goals_page(screen=="missions")
 		"levels":
 			text(tr("ВЫБОР УРОВНЯ"),28)
 			for item in Profile.levels:
@@ -192,7 +205,7 @@ func show_page() -> void:
 			button(tr("Повернуть героя ↻"),func(): hero.rotation.y+=.5)
 			button(tr("Гардероб"),func(): wardrobe(false))
 			button(tr("Магазин"),func(): wardrobe(true))
-			button(tr("Следующий уровень"),func(): Flow.go("res://Scenes/Screens/LevelSelect.tscn"))
+			button(tr("Играть"),play_next)
 			button(tr("В меню"),func(): Flow.go("res://Scenes/Screens/MainMenu.tscn"))
 func wardrobe(as_shop: bool = false) -> void:
 	page="shop" if as_shop else "wardrobe"
@@ -275,6 +288,7 @@ func settings() -> void:
 		slider.value_changed.connect(func(v): Profile.data[key]=v; Profile.save())
 	button(tr("Вибрация: ")+(tr("вкл") if Profile.data.vibration else tr("выкл")),func(): Profile.data.vibration=not Profile.data.vibration;Profile.save();settings())
 	button(tr("Качество: ")+(tr("60 FPS / тени") if int(Profile.data.quality)==1 else tr("30 FPS / экономно")),func(): Profile.data.quality=1-int(Profile.data.quality);Profile.save();settings())
+	button(tr("Выбор уровня"),func():screen="levels";show_page())
 	button(tr("Назад"),show_page)
 func _unhandled_input(event: InputEvent) -> void:
 	if screen!="home": return
@@ -284,7 +298,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _notification(what: int) -> void:
 	if what==NOTIFICATION_APPLICATION_FOCUS_OUT: Profile.save()
 	if what==NOTIFICATION_WM_GO_BACK_REQUEST:
+		if is_instance_valid(reward_modal):reward_modal.queue_free();return
 		if page in ["settings","shop","wardrobe"]:show_page()
+		elif page in ["missions","achievements"]:navigate("menu")
 		elif screen!="menu":navigate("menu")
 		else:Profile.save()
 
@@ -293,7 +309,8 @@ func navigate(target: String) -> void:
 	if target=="shop":wardrobe(true);return
 	if target=="home" and screen!="home":Flow.go("res://Scenes/Screens/Home.tscn");return
 	if screen=="home" and target!="home":
-		Flow.go("res://Scenes/Screens/LevelSelect.tscn" if target=="levels" else "res://Scenes/Screens/MainMenu.tscn");return
+		Flow.menu_page=target
+		Flow.go("res://Scenes/Screens/MainMenu.tscn");return
 	screen=target
 	show_page()
 func panel_style(color: Color, border: Color) -> StyleBoxFlat:
@@ -310,6 +327,8 @@ func menu_theme() -> Theme:
 	theme.set_stylebox("pressed","Button",panel_style(Color("173643"),Color("ffce68")))
 	theme.set_stylebox("focus","Button",panel_style(Color(0,0,0,0),Color("ffe090")))
 	theme.set_color("font_color","Button",Color("fff3d4"))
+	theme.set_stylebox("disabled","Button",panel_style(Color("516b7b"),Color("718a98")))
+	theme.set_color("font_disabled_color","Button",Color("d8e4ec"))
 	return theme
 
 func sync_audio() -> void:
@@ -328,3 +347,87 @@ func toast(value: String) -> void:
 	note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;note.custom_minimum_size.y=44
 	note.mouse_filter=Control.MOUSE_FILTER_IGNORE;bubble.add_child(note)
 	var fade:=bubble.create_tween();fade.tween_interval(1.6);fade.tween_property(bubble,"modulate:a",0.0,.25);fade.tween_callback(bubble.queue_free)
+
+func play_next() -> void:
+	if Flow.busy:return
+	var id:=int(Profile.data.unlocked)
+	var saved: Dictionary=Profile.data.suspended_run
+	if not saved.is_empty():id=int(saved.level)
+	Flow.auto_start=true
+	if id==0:Flow.go("res://Scenes/Levels/Endless.tscn")
+	else:Flow.start_level(id,int(Profile.data.checkpoint)==id,true)
+func build_lobby(root: Control) -> void:
+	lobby=Control.new();root.add_child(lobby);lobby.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	lobby.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	var brand:=Label.new();lobby.add_child(brand);brand.text="DRILLDROP"
+	brand.anchor_left=.18;brand.anchor_right=.82;brand.offset_top=90;brand.offset_bottom=132
+	brand.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;brand.add_theme_font_size_override("font_size",34)
+	brand.add_theme_color_override("font_outline_color",Color("142d3c"));brand.add_theme_color_override("font_color",Color("ffdc83"));brand.add_theme_constant_override("outline_size",8)
+	var record:=Label.new();record.name="Best";lobby.add_child(record)
+	record.position=Vector2(22,146);record.add_theme_color_override("font_outline_color",Color("142d3c"));record.add_theme_font_size_override("font_size",20);record.add_theme_constant_override("outline_size",6)
+	daily_badge=Button.new();lobby.add_child(daily_badge);daily_badge.position=Vector2(20,213);daily_badge.custom_minimum_size=Vector2(142,68)
+	daily_badge.icon=preload("res://Art/UI/Nav/missions.svg");daily_badge.pressed.connect(func():navigate("missions"))
+	reward_badge=Button.new();lobby.add_child(reward_badge);reward_badge.anchor_left=1;reward_badge.anchor_right=1
+	reward_badge.offset_left=-182;reward_badge.offset_right=-20;reward_badge.offset_top=213;reward_badge.offset_bottom=281
+	reward_badge.icon=preload("res://Art/UI/Nav/achievements.svg");reward_badge.pressed.connect(func():navigate("achievements"))
+	var play:=Button.new();lobby.add_child(play);play.name="Play";play.text=tr("Коснись, чтобы играть")
+	play.anchor_top=1;play.anchor_bottom=1;play.anchor_right=1
+	play.offset_left=54;play.offset_right=-54;play.offset_top=-260;play.offset_bottom=-178
+	play.add_theme_font_size_override("font_size",26);play.add_theme_color_override("font_color",Color("17343c"))
+	play.add_theme_stylebox_override("normal",panel_style(Color("ffd36b"),Color("fff2c7")));play.pressed.connect(play_next)
+	var endless:=Button.new();lobby.add_child(endless);endless.text=tr("Бесконечный режим")
+	endless.anchor_top=1;endless.anchor_bottom=1;endless.anchor_left=.22;endless.anchor_right=.78
+	endless.offset_top=-163;endless.offset_bottom=-119
+	endless.pressed.connect(func():Flow.auto_start=true;Flow.go("res://Scenes/Levels/Endless.tscn"))
+	update_lobby()
+func update_lobby() -> void:
+	if wallet_label:wallet_label.text="%s"%Profile.data.coins
+	if not lobby:return
+	lobby.get_node("Best").text=tr("Рекорд")+"  %06d"%int(Profile.data.best)
+	daily_badge.text=tr("Задания")+("  ●" if Goals.available(true)>0 else "")
+	reward_badge.text=tr("Награды")+("  ●" if Goals.available(false)>0 else "")
+func goals_page(daily: bool) -> void:
+	page="missions" if daily else "achievements"
+	sheet.anchor_top=.20;sheet.offset_top=0;clear()
+	text(tr("ЕЖЕДНЕВНЫЕ ЗАДАНИЯ") if daily else tr("ДОСТИЖЕНИЯ"),25)
+	if daily:
+		var timer:=text(tr("Новые задания каждый день"),16);timer.name="DailyReset"
+	for item in Goals.entries(daily):
+		var row:=PanelContainer.new();ui.add_child(row)
+		row.add_theme_stylebox_override("panel",panel_style(Color("dfebf3"),Color("9bbbd0")))
+		var stack:=VBoxContainer.new();row.add_child(stack)
+		var title:=Label.new();title.text=tr(item.title);title.add_theme_color_override("font_color",Color("203949"));title.add_theme_font_size_override("font_size",21);stack.add_child(title)
+		var bar:=ProgressBar.new();bar.max_value=int(item.target);bar.value=Goals.progress(item,daily);bar.show_percentage=false;bar.custom_minimum_size.y=28;stack.add_child(bar)
+		bar.add_theme_stylebox_override("background",panel_style(Color("203c53"),Color("6b899d")))
+		bar.add_theme_stylebox_override("fill",panel_style(Color("65b943"),Color("a8e67c")))
+		var count:=Label.new();bar.add_child(count);count.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);count.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;count.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
+		count.text="%d / %d"%[Goals.progress(item,daily),int(item.target)];count.add_theme_color_override("font_outline_color",Color("203c53"));count.add_theme_constant_override("outline_size",3)
+		var claim:=Button.new();stack.add_child(claim);claim.custom_minimum_size.y=42
+		claim.text=tr("Получено") if Goals.claimed(item.id,daily) else tr("Забрать")+"   ◈ %d"%int(item.reward)
+		claim.disabled=Goals.claimed(item.id,daily) or Goals.progress(item,daily)<int(item.target)
+		claim.pressed.connect(func():
+			var earned:=Goals.claim(item.id,daily)
+			goals_page(daily)
+			if earned>0:reward_popup(earned))
+	button(tr("Главная"),func():navigate("menu"))
+func reward_popup(amount: int) -> void:
+	var modal:=PanelContainer.new();reward_modal=modal;sheet.get_parent().add_child(modal)
+	modal.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	modal.add_theme_stylebox_override("panel",panel_style(Color("12678b"),Color("76dafa")))
+	var center:=CenterContainer.new();modal.add_child(center);var stack:=VBoxContainer.new();center.add_child(stack)
+	var coin=preload("res://Script/UI/RewardCoin.gd").new();stack.add_child(coin)
+	var title:=Label.new();title.text=tr("НАГРАДА!");title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;title.add_theme_font_size_override("font_size",42);stack.add_child(title)
+	var label:=Label.new();label.text=tr("Монеты: %d")%amount;label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;label.add_theme_font_size_override("font_size",30);stack.add_child(label)
+	var done:=Button.new();done.text=tr("Продолжить");done.custom_minimum_size=Vector2(280,64);stack.add_child(done);done.pressed.connect(modal.queue_free)
+
+func _goals_updated() -> void:
+	update_lobby()
+	if page in ["missions","achievements"]:goals_page(page=="missions")
+
+func _process(_delta: float) -> void:
+	if page!="missions" or not ui:return
+	var label=ui.get_node_or_null("DailyReset")
+	if label:
+		var now:=Time.get_datetime_dict_from_system()
+		var left:=86400-int(now.hour)*3600-int(now.minute)*60-int(now.second)
+		label.text=tr("Обновление через %02d:%02d:%02d")%[left/3600,(left%3600)/60,left%60]

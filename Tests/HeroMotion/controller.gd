@@ -4,6 +4,7 @@ func check(ok: bool,label: String) -> void:
 	if not ok:failures+=1;push_error(label)
 func _ready() -> void:call_deferred("run")
 func run() -> void:
+	if not "--test" in OS.get_cmdline_user_args():get_tree().quit(2);return
 	var player=preload("res://Scenes/Actors/Player.tscn").instantiate();add_child(player)
 	await get_tree().process_frame
 	player.reset();player.tick(.016);check(player.last_anim=="run","Normal run")

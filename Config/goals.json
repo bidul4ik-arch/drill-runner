@@ -1,0 +1,97 @@
+{
+  "achievements": [
+    {
+      "id": "first_run",
+      "title": "Вперёд, кристаллы!",
+      "metric": "runs",
+      "target": 1,
+      "reward": 30
+    },
+    {
+      "id": "coins_100",
+      "title": "Золотая жила",
+      "metric": "coins",
+      "target": 100,
+      "reward": 80
+    },
+    {
+      "id": "distance_5000",
+      "title": "Исследователь глубин",
+      "metric": "distance",
+      "target": 5000,
+      "reward": 150
+    },
+    {
+      "id": "jump_50",
+      "title": "Выше рельсов",
+      "metric": "jumps",
+      "target": 50,
+      "reward": 100
+    },
+    {
+      "id": "slide_30",
+      "title": "Ниже труб",
+      "metric": "slides",
+      "target": 30,
+      "reward": 100
+    },
+    {
+      "id": "buff_10",
+      "title": "На полной мощности",
+      "metric": "pickups",
+      "target": 10,
+      "reward": 120
+    },
+    {
+      "id": "boss_1",
+      "title": "Первый великан",
+      "metric": "bosses",
+      "target": 1,
+      "reward": 150
+    },
+    {
+      "id": "boss_3",
+      "title": "Гроза шахты",
+      "metric": "bosses",
+      "target": 3,
+      "reward": 250
+    }
+  ],
+  "daily": [
+    {
+      "id": "daily_coins",
+      "title": "Собрать монеты",
+      "metric": "coins",
+      "target": 40,
+      "reward": 60
+    },
+    {
+      "id": "daily_distance",
+      "title": "Пробежать по шахте",
+      "metric": "distance",
+      "target": 1200,
+      "reward": 80
+    },
+    {
+      "id": "daily_jumps",
+      "title": "Подпрыгнуть",
+      "metric": "jumps",
+      "target": 12,
+      "reward": 50
+    },
+    {
+      "id": "daily_slides",
+      "title": "Сделать подкаты",
+      "metric": "slides",
+      "target": 8,
+      "reward": 50
+    },
+    {
+      "id": "daily_runs",
+      "title": "Отправиться в забег",
+      "metric": "runs",
+      "target": 3,
+      "reward": 40
+    }
+  ]
+}

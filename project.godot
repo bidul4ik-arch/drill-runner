@@ -14,6 +14,10 @@ config/name="DrillDrop"
 run/main_scene="res://Scenes/Screens/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+boot_splash/image="res://Art/UI/Lobby/splash.png"
+boot_splash/bg_color=Color(0.025, 0.10, 0.14, 1)
+boot_splash/fullsize=true
+boot_splash/use_filter=true
 
 [display]
 
@@ -42,5 +46,6 @@ anti_aliasing/quality/msaa_3d=2
 Locale="*res://Script/Services/Locale.gd"
 Banter="*res://Script/Services/Banter.gd"
 Profile="*res://Script/Services/Profile.gd"
+Goals="*res://Script/Services/Goals.gd"
 Flow="*res://Script/Services/Flow.gd"
 StoreBridge="*res://Script/Services/StoreBridge.gd"

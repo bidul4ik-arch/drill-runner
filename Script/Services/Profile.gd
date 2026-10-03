@@ -70,6 +70,9 @@ func apply_skin(root: Node, id: String = "") -> void:
 	for skin in skins:
 		if skin.id==id: item=skin
 	for cap in root.find_children("CapAccessory*","MeshInstance3D",true,false): cap.visible=bool(data.cap)
+	for hair in root.find_children("HairOriginal*","MeshInstance3D",true,false):hair.visible=not bool(data.cap)
+	for hair in root.find_children("HairUnderCap*","MeshInstance3D",true,false):hair.visible=bool(data.cap)
+	for glasses in root.find_children("GogglesAccessory*","MeshInstance3D",true,false):glasses.visible=not bool(data.cap)
 	for mesh in root.find_children("*","MeshInstance3D",true,false):
 		for i in mesh.mesh.get_surface_count():
 			var mat: Material=mesh.mesh.surface_get_material(i)

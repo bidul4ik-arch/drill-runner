@@ -1,0 +1,21 @@
+00:01.391  blend            | Read blend: "/Users/ilyadendy/Downloads/drill-runner-main/DrillDropDev/Art/Blender/hero_reference_final.blend"
+OBJECT spineMesh MESH 6752 ['dark', 'gold', 'brass', 'sole', 'skin', 'leather', 'silver', 'teal', 'paint', 'steel', 'edge', 'cyan']
+OBJECT rootMesh MESH 2016 ['brass', 'teal', 'leather', 'silver', 'dark', 'steel', 'edge', 'skin']
+OBJECT headMesh MESH 20242 ['Hero face skin', 'skin', 'blush', 'hair', 'white', 'iris', 'dark', 'lip', 'leather', 'brass', 'lens']
+OBJECT thighLMesh MESH 3188 ['teal', 'sole', 'dark', 'brass']
+OBJECT shinLMesh MESH 3316 ['teal', 'sole', 'leather', 'steel', 'brass']
+OBJECT armLMesh MESH 3522 ['gold']
+OBJECT foreLMesh MESH 1016 ['skin', 'brass', 'silver']
+OBJECT handLMesh MESH 370 ['leather', 'dark', 'steel', 'edge']
+OBJECT footLMesh MESH 2102 ['dark', 'sole', 'leather', 'gold', 'brass']
+OBJECT thighRMesh MESH 3188 ['teal', 'sole', 'dark', 'brass']
+OBJECT shinRMesh MESH 3316 ['teal', 'sole', 'leather', 'steel', 'brass']
+OBJECT armRMesh MESH 3522 ['gold']
+OBJECT foreRMesh MESH 1016 ['skin', 'brass', 'silver']
+OBJECT handRMesh MESH 370 ['leather', 'dark', 'steel', 'edge']
+OBJECT footRMesh MESH 2102 ['dark', 'sole', 'leather', 'gold', 'brass']
+OBJECT DrillDropHeroRig ARMATURE  
+OBJECT CapAccessory MESH 730 ['teal', 'gold']
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

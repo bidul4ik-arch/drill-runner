@@ -1,0 +1,50 @@
+00:00.749  blend            | Read blend: "/Users/ilyadendy/Downloads/drill-runner-main/DrillDropDev/Art/Blender/hero_reference_final.blend"
+Информация: Применённый модификатор был не первым в списке, поэтому результат может отличаться от ожидаемого
+INFO Draco is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+11:02:22 | INFO: Starting glTF 2.0 export
+11:02:22 | INFO: Extracting primitive: Jacket articulated sleeve
+11:02:23 | INFO: Primitives created: 1
+11:02:23 | INFO: Extracting primitive: Jacket articulated sleeve.001
+11:02:23 | INFO: Primitives created: 1
+11:02:23 | INFO: Extracting primitive: Cap crown
+11:02:23 | INFO: Primitives created: 2
+11:02:23 | INFO: Extracting primitive: Sculpted rubber outsole
+11:02:23 | INFO: Primitives created: 5
+11:02:23 | INFO: Extracting primitive: Sculpted rubber outsole.001
+11:02:23 | INFO: Primitives created: 5
+11:02:23 | INFO: Extracting primitive: Forearm anatomy
+11:02:23 | INFO: Primitives created: 3
+11:02:23 | INFO: Extracting primitive: Forearm anatomy.001
+11:02:23 | INFO: Primitives created: 3
+11:02:23 | INFO: Extracting primitive: Sculpted face.003
+11:02:23 | INFO: Primitives created: 3
+11:02:23 | INFO: Extracting primitive: Sculpted face.001
+11:02:23 | INFO: Primitives created: 1
+11:02:23 | INFO: Extracting primitive: Sculpted face.002
+11:02:23 | INFO: Primitives created: 1
+11:02:23 | INFO: Extracting primitive: Куб.030
+11:02:23 | INFO: Primitives created: 4
+11:02:23 | INFO: Extracting primitive: Куб.049
+11:02:23 | INFO: Primitives created: 4
+11:02:23 | INFO: Extracting primitive: Sculpted face
+11:02:23 | INFO: Primitives created: 8
+11:02:23 | INFO: Extracting primitive: Hem seam
+11:02:23 | INFO: Primitives created: 8
+11:02:23 | INFO: Extracting primitive: Trouser gathered calf
+11:02:23 | INFO: Primitives created: 5
+11:02:23 | INFO: Extracting primitive: Trouser gathered calf.001
+11:02:23 | INFO: Primitives created: 5
+11:02:23 | INFO: Extracting primitive: Shirt
+11:02:23 | INFO: Primitives created: 12
+11:02:23 | INFO: Extracting primitive: Cargo thigh
+11:02:23 | INFO: Primitives created: 4
+11:02:23 | INFO: Extracting primitive: Cargo thigh.001
+11:02:23 | INFO: Primitives created: 4
+11:02:24 | INFO: Finished glTF 2.0 export in 1.3408567905426025 s
+
+Информация: Сохранено как "hero_cap_fit.blend"
+CAP_FIT_EXPORTED
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

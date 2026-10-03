@@ -341,6 +341,7 @@ func _physics_process(delta: float) -> void:
 		var speed := run_speed()
 		drill.base_speed = speed
 		distance += speed * delta
+		Goals.record("distance",speed*delta)
 		elapsed += delta
 		shield_left = maxf(0,shield_left-delta)
 		magnet_left = maxf(0,magnet_left-delta)
@@ -359,10 +360,12 @@ func score() -> int:
 	return int(distance * 10) + coins * 50
 func collect_coin() -> void:
 	coins += 1
+	Goals.record("coins")
 	fx_left = .18
 	flash.color = Color(1,.75,.2,.08)
 	sfx("coin")
 func powerup(key: String) -> void:
+	Goals.record("pickups")
 	var comic=preload("res://Script/UI/ComicImpact.gd").new()
 	comic.word=tr("ЩИТ!") if key=="shield" else tr("МАГНИТ!")
 	comic.caption=Banter.take(key)

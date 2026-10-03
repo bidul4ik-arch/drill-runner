@@ -84,10 +84,12 @@ func go_right() -> void:
 func jump() -> bool:
 	if position.y > .01 or slide_left > 0: return false
 	jump_velocity = 9.5
+	Goals.record("jumps")
 	return true
 func slide() -> bool:
 	if position.y > .01 or slide_left > 0: return false
 	slide_left = .8
+	Goals.record("slides")
 	return true
 func get_current_speed() -> float:
 	return base_speed
