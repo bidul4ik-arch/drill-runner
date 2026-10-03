@@ -97,9 +97,8 @@ func _ready() -> void:
 
 func setup_audio() -> void:
 	music = AudioStreamPlayer.new()
-	var stream: AudioStreamWAV = load("res://Audio/music.wav")
-	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-	stream.loop_end = stream.data.size() / 2
+	var stream: AudioStreamMP3 = load("res://Audio/gamejam.mp3")
+	stream.loop = true
 	music.stream = stream
 	add_child(music)
 	music.play()

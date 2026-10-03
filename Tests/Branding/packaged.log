@@ -1,0 +1,16 @@
+Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
+Vulkan API 1.2.231 - Forward+ - Using Vulkan Device #0: Apple - Apple M2
+ 
+Isolated profile: PASS
+Imported looping MP3: PASS
+Track duration: 104.142860412598
+Application icon: PASS
+Graphic logo: PASS
+Menu music playing: PASS
+Original music speed: PASS
+Music wraps at track end: PASS
+Menu mute: PASS
+Run music playing: PASS
+Run mute: PASS
+Run unmute: PASS
+BRANDING AND MUSIC: 0 failures

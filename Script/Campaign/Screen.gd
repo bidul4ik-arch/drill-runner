@@ -21,8 +21,9 @@ var daily_badge: Button
 var reward_modal: PanelContainer
 func _ready() -> void:
 	menu_music=AudioStreamPlayer.new();add_child(menu_music)
-	menu_music.stream=preload("res://Audio/music.wav");menu_music.pitch_scale=.85
-	menu_music.finished.connect(func(): menu_music.play())
+	var track: AudioStreamMP3=preload("res://Audio/gamejam.mp3")
+	track.loop=true
+	menu_music.stream=track
 	click_audio=AudioStreamPlayer.new();add_child(click_audio);click_audio.stream=preload("res://Audio/ui.wav")
 	Profile.changed.connect(sync_audio)
 	sync_audio();menu_music.play()
@@ -359,12 +360,15 @@ func play_next() -> void:
 func build_lobby(root: Control) -> void:
 	lobby=Control.new();root.add_child(lobby);lobby.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	lobby.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	var brand:=Label.new();lobby.add_child(brand);brand.text="DRILLDROP"
-	brand.anchor_left=.18;brand.anchor_right=.82;brand.offset_top=90;brand.offset_bottom=132
-	brand.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;brand.add_theme_font_size_override("font_size",34)
-	brand.add_theme_color_override("font_outline_color",Color("142d3c"));brand.add_theme_color_override("font_color",Color("ffdc83"));brand.add_theme_constant_override("outline_size",8)
+	var brand:=TextureRect.new();brand.name="BrandLogo";lobby.add_child(brand)
+	brand.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	brand.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	brand.texture=preload("res://Art/UI/Lobby/logo.png")
+	brand.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	brand.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	brand.anchor_left=.12;brand.anchor_right=.88;brand.offset_top=76;brand.offset_bottom=154
 	var record:=Label.new();record.name="Best";lobby.add_child(record)
-	record.position=Vector2(22,146);record.add_theme_color_override("font_outline_color",Color("142d3c"));record.add_theme_font_size_override("font_size",20);record.add_theme_constant_override("outline_size",6)
+	record.position=Vector2(22,163);record.add_theme_color_override("font_outline_color",Color("142d3c"));record.add_theme_font_size_override("font_size",20);record.add_theme_constant_override("outline_size",6)
 	daily_badge=Button.new();lobby.add_child(daily_badge);daily_badge.position=Vector2(20,213);daily_badge.custom_minimum_size=Vector2(142,68)
 	daily_badge.icon=preload("res://Art/UI/Nav/missions.svg");daily_badge.pressed.connect(func():navigate("missions"))
 	reward_badge=Button.new();lobby.add_child(reward_badge);reward_badge.anchor_left=1;reward_badge.anchor_right=1
