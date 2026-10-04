@@ -372,7 +372,7 @@ func build_lobby(root: Control) -> void:
 	daily_badge=Button.new();lobby.add_child(daily_badge);daily_badge.position=Vector2(20,213);daily_badge.custom_minimum_size=Vector2(142,68)
 	daily_badge.icon=preload("res://Art/UI/Nav/missions.svg");daily_badge.pressed.connect(func():navigate("missions"))
 	reward_badge=Button.new();lobby.add_child(reward_badge);reward_badge.anchor_left=1;reward_badge.anchor_right=1
-	reward_badge.offset_left=-182;reward_badge.offset_right=-20;reward_badge.offset_top=213;reward_badge.offset_bottom=281
+	reward_badge.offset_left=-220;reward_badge.offset_right=-20;reward_badge.offset_top=213;reward_badge.offset_bottom=281
 	reward_badge.icon=preload("res://Art/UI/Nav/achievements.svg");reward_badge.pressed.connect(func():navigate("achievements"))
 	var play:=Button.new();lobby.add_child(play);play.name="Play";play.text=tr("Коснись, чтобы играть")
 	play.anchor_top=1;play.anchor_bottom=1;play.anchor_right=1

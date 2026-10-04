@@ -15,6 +15,9 @@ func choose(locale: String) -> String:
 	return "ru" if locale.to_lower().begins_with("ru") else "en"
 func refresh() -> void:
 	language=choose(OS.get_locale_language())
+	if OS.has_feature("web"):
+		var platform=JavaScriptBridge.get_interface("DrillDropPlatform")
+		if platform!=null:language=choose(str(platform.language))
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--language="):language=choose(arg.trim_prefix("--language="))
 	TranslationServer.set_locale(language)

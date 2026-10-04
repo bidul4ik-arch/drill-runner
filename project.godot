@@ -49,3 +49,5 @@ Profile="*res://Script/Services/Profile.gd"
 Goals="*res://Script/Services/Goals.gd"
 Flow="*res://Script/Services/Flow.gd"
 StoreBridge="*res://Script/Services/StoreBridge.gd"
+
+Yandex="*res://Script/Services/Yandex.gd"

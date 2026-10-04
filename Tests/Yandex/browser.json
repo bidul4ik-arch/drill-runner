@@ -1,0 +1,16 @@
+{
+  "result": {
+    "events": [
+      "ready",
+      "start",
+      "stop"
+    ],
+    "language": "ru",
+    "save": "{\"achievement_claims\":[],\"best\":0,\"cap\":false,\"checkpoint\":0,\"claimed\":[],\"coins\":0,\"completed\":[],\"daily\":{\"claimed\":[],\"day\":\"2026-10-04\",\"ids\":[\"daily_coins\",\"daily_distance\",\"daily_runs\"],\"progress\":{\"distance\":15.325,\"runs\":1}},\"effects\":0.65,\"last_level\":1,\"music\":0.35,\"owned\":[\"explorer\"],\"quality\":1,\"skin\":\"explorer\",\"started\":true,\"stats\":{\"bosses\":0,\"distance\":15.325,\"runs\":1},\"suspended_run\":{\"coins\":0,\"distance\":15.325,\"elapsed\":1.33333333333333,\"level\":1,\"run_id\":\"1791098087.645-4208536316\"},\"test_pending\":{},\"test_premium\":0,\"test_transactions\":[],\"unlocked\":1,\"vibration\":true}",
+    "hidden": false,
+    "isolated": false,
+    "reloadPreserved": true,
+    "english": true
+  },
+  "errors": []
+}

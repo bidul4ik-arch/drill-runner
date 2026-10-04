@@ -22,17 +22,24 @@ func go(path: String) -> void:
 	var tween := create_tween()
 	tween.tween_property(shade,"modulate:a",1,.18)
 	await tween.finished
-	ResourceLoader.load_threaded_request(path)
-	var progress: Array=[]
-	while ResourceLoader.load_threaded_get_status(path,progress)==ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-		if not progress.is_empty():bar.value=float(progress[0])*100
+	var packed: PackedScene
+	if OS.has_feature("web"):
+		# Single-thread web builds load after the cover has rendered.
 		await get_tree().process_frame
+		packed=load(path) as PackedScene
+	else:
+		ResourceLoader.load_threaded_request(path)
+		var progress: Array=[]
+		while ResourceLoader.load_threaded_get_status(path,progress)==ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			if not progress.is_empty():bar.value=float(progress[0])*100
+			await get_tree().process_frame
+		if ResourceLoader.load_threaded_get_status(path)==ResourceLoader.THREAD_LOAD_LOADED:
+			packed=ResourceLoader.load_threaded_get(path) as PackedScene
 	bar.value=100
-	if ResourceLoader.load_threaded_get_status(path)==ResourceLoader.THREAD_LOAD_LOADED:
-		var packed := ResourceLoader.load_threaded_get(path) as PackedScene
+	if packed:
 		get_tree().change_scene_to_packed(packed)
 		await get_tree().process_frame
-	else: push_error("Scene failed: "+path)
+	else:push_error("Scene failed: "+path)
 	tween=create_tween()
 	tween.tween_property(shade,"modulate:a",0,.18)
 	await tween.finished

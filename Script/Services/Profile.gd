@@ -23,6 +23,11 @@ func _ready() -> void:
 			data.best = int(old.get_value("progress","best",0))
 			data.music = float(old.get_value("audio","music",.35))
 			data.effects = float(old.get_value("audio","effects",.65))
+	if OS.has_feature("web") and not test_store:
+		var platform=JavaScriptBridge.get_interface("DrillDropPlatform")
+		if platform!=null:
+			var web_save=JSON.parse_string(str(platform.readSave())) if str(platform.readSave())!="" else null
+			if web_save is Dictionary:data.merge(web_save,true)
 	# JSON numbers return as floats; IDs must remain integers for Array.has().
 	data.completed = data.completed.map(func(value): return int(value))
 	for key in ["coins", "unlocked", "checkpoint", "last_level", "best", "test_premium"]:
@@ -33,6 +38,9 @@ func save() -> void:
 		f.store_string(JSON.stringify(data))
 		f.close()
 		DirAccess.rename_absolute(path+".tmp",path)
+	if OS.has_feature("web") and not test_store:
+		var platform=JavaScriptBridge.get_interface("DrillDropPlatform")
+		if platform!=null:platform.writeSave(JSON.stringify(data))
 	changed.emit()
 func level(id: int) -> Dictionary:
 	for item in levels:
