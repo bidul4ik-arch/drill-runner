@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>DrillDrop</title><link rel="icon" href="app-icon.png">
 <style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#092530;touch-action:none;overscroll-behavior:none;user-select:none;-webkit-user-select:none}canvas{display:block;outline:none;width:100%;height:100%;touch-action:none}#loading{position:fixed;inset:0;background:#092530 url('splash.png') center/cover no-repeat;display:flex;align-items:flex-end;justify-content:center;z-index:10}#status{margin:0 0 7vh;padding:16px 22px;border-radius:16px;background:#092530ee;color:#ffe1a2;font:bold 18px sans-serif;max-width:80%;text-align:center}progress{display:block;width:100%;margin-top:12px;accent-color:#ffd36b}
-</style>$GODOT_HEAD_INCLUDE</head><body><canvas id="canvas" tabindex="0">Your browser does not support HTML5 canvas.</canvas><div id="loading"><div id="status"><span id="message">DrillDrop</span><progress id="progress" max="100" value="0"></progress></div></div><script src="yandex.js"></script><script src="$GODOT_URL"></script><script>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#092530;touch-action:none;overscroll-behavior:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}#game{position:relative;width:min(100vw,66.6667vh);height:100vh;margin:auto}canvas{display:block;outline:none;width:100%;height:100%;touch-action:none}#loading{position:absolute;inset:0;background:#092530 url('splash.png') center/cover no-repeat;display:flex;align-items:flex-end;justify-content:center;z-index:10}#status{margin:0 0 7vh;padding:16px 22px;border-radius:16px;background:#092530ee;color:#ffe1a2;font:bold 18px sans-serif;max-width:80%;text-align:center}progress{display:block;width:100%;margin-top:12px;accent-color:#ffd36b}
+</style>$GODOT_HEAD_INCLUDE</head><body><div id="game"><canvas id="canvas" tabindex="0">Your browser does not support HTML5 canvas.</canvas><div id="loading"><div id="status"><span id="message">DrillDrop</span><progress id="progress" max="100" value="0"></progress></div></div></div><script src="save-store.js"></script><script src="yandex.js"></script><script src="$GODOT_URL"></script><script>
 const config=$GODOT_CONFIG;
+const canvas=document.getElementById('canvas');
+config.canvasResizePolicy=0;
+function resizeCanvas(){const ratio=Math.min(window.devicePixelRatio||1,1.5);canvas.width=Math.round(canvas.clientWidth*ratio);canvas.height=Math.round(canvas.clientHeight*ratio);}
+new ResizeObserver(resizeCanvas).observe(document.getElementById('game'));resizeCanvas();
 const engine=new Engine(config);
 const platform=window.DrillDropPlatform;
 const ready=platform.ready.bind(platform);

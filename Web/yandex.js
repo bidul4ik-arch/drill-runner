@@ -1,5 +1,7 @@
 /* Platform adapter. No SDK stub is shipped in the release archive. */
 window.DrillDropPlatform = (() => {
+  let storage=null;try{storage=window.localStorage;}catch(_){}
+  let saves = null;
   let sdk = null, ready = false, playing = false, reported = false;
   let sdkPaused = false, callback = null;
   let hidden = document.hidden || !document.hasFocus();
@@ -10,8 +12,8 @@ window.DrillDropPlatform = (() => {
     setPauseCallback(fn) { callback = fn; fn(api.hidden); },
     ready() { if (ready) return; ready = true; sdk?.features.LoadingAPI?.ready(); },
     gameplay(value) { playing = !!value; report(); },
-    readSave() { try { return localStorage.getItem(saveKey()) || ''; } catch (_) { return ''; } },
-    writeSave(value) { try { localStorage.setItem(saveKey(), value); } catch (_) {} },
+    readSave() { return saves?.readSave() || ''; },
+    writeSave(value) { saves?.writeSave(value); },
     async init() {
       const local = ['localhost', '127.0.0.1'].includes(location.hostname);
       try {
@@ -25,13 +27,15 @@ window.DrillDropPlatform = (() => {
         api.language = sdk.environment.i18n.lang.startsWith('ru') ? 'ru' : 'en';
         sdk.on('game_api_pause', () => { sdkPaused = true; update(); });
         sdk.on('game_api_resume', () => { sdkPaused = false; update(); });
+        saves=new DrillDropSaveStore(storage,sdk.environment.app.id);
+        await saves.connect(sdk);
       } catch (error) {
         if (!local) throw new Error('SDK Яндекс Игр не загрузился. Обновите страницу. / Yandex Games SDK failed to load. Reload the page.');
         console.info('Local preview without Yandex SDK');
+        saves=new DrillDropSaveStore(storage,'local');
       }
     }
   };
-  function saveKey() { return 'drilldrop-v1-' + (sdk?.environment.app.id || 'local'); }
   function report() {
     const active = playing && !api.hidden;
     if (active === reported) return;
@@ -41,6 +45,7 @@ window.DrillDropPlatform = (() => {
   function update() {
     api.hidden = hidden || sdkPaused;
     callback?.(api.hidden);
+    if(api.hidden)saves?.flush();
     report();
   }
   document.addEventListener('visibilitychange', () => { hidden = document.hidden; update(); });

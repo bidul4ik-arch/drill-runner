@@ -13,10 +13,10 @@ func _ready() -> void:
 	levels = JSON.parse_string(FileAccess.get_file_as_string("res://Config/levels.json"))
 	skins = JSON.parse_string(FileAccess.get_file_as_string("res://Config/skins.json"))
 	bosses = JSON.parse_string(FileAccess.get_file_as_string("res://Config/bosses.json"))
-	if FileAccess.file_exists(path):
+	if not OS.has_feature("web") and FileAccess.file_exists(path):
 		var saved = JSON.parse_string(FileAccess.get_file_as_string(path))
 		if saved is Dictionary: data.merge(saved,true)
-	else:
+	elif not OS.has_feature("web"):
 		var old := ConfigFile.new()
 		if old.load("user://progress.cfg") == OK and not "--test" in OS.get_cmdline_user_args():
 			data.coins = int(old.get_value("progress","coins",0))

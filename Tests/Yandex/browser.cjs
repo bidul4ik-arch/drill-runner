@@ -1,20 +1,21 @@
 const {chromium}=require('playwright');const fs=require('node:fs');
 (async()=>{
-const browser=await chromium.launch({headless:true,args:['--disable-dev-shm-usage']});
+const browser=await chromium.launch({headless:true,args:['--enable-gpu','--use-gl=angle','--use-angle=metal','--disable-dev-shm-usage','--disable-background-timer-throttling','--disable-renderer-backgrounding','--disable-backgrounding-occluded-windows']});
 const context=await browser.newContext({viewport:{width:430,height:932},hasTouch:true});
 let language='ru';const page=await context.newPage();const errors=[];
 page.on('console',m=>{console.log(m.type(),m.text());if(m.type()==='error'||/SCRIPT ERROR|ERROR:/.test(m.text()))errors.push(m.text());});
 page.on('pageerror',e=>errors.push(e.message));
-await page.route('**/sdk.js',route=>route.fulfill({contentType:'application/javascript',body:`window.__events=[];window.__sdkHandlers={};window.YaGames={init:async()=>({environment:{i18n:{lang:'${language}'},app:{id:'test'}},features:{LoadingAPI:{ready:()=>__events.push('ready')},GameplayAPI:{start:()=>__events.push('start'),stop:()=>__events.push('stop')}},on:(key,fn)=>__sdkHandlers[key]=fn})};`}));
+await page.route('**/sdk.js',route=>route.fulfill({contentType:'application/javascript',body:`window.__events=[];window.__sdkHandlers={};window.YaGames={init:async()=>({environment:{i18n:{lang:'${language}'},app:{id:'test'}},features:{LoadingAPI:{ready:()=>__events.push('ready')},GameplayAPI:{start:()=>__events.push('start'),stop:()=>__events.push('stop')}},getPlayer:async()=>({getUniqueID:()=>"browser-test",getData:async()=>({}),setData:async()=>__events.push("cloud-save")}),on:(key,fn)=>__sdkHandlers[key]=fn})};`}));
 await page.goto('http://127.0.0.1:8765');
 await page.waitForFunction(()=>window.__events?.includes('ready'),null,{timeout:180000});
 await page.waitForTimeout(1500);await page.screenshot({path:'Tests/Yandex/menu.png'});
 await page.touchscreen.tap(215,786);
 await page.waitForFunction(()=>window.__events?.includes('start'),null,{timeout:120000});
 await page.waitForTimeout(1000);await page.screenshot({path:'Tests/Yandex/run.png'});
+const timing=await page.evaluate(()=>new Promise(resolve=>{const values=[];let first,previous;function tick(t){if(first===undefined)first=t;if(previous!==undefined)values.push(t-previous);previous=t;if(t-first<5000)requestAnimationFrame(tick);else{values.sort((a,b)=>a-b);resolve({frames:values.length,averageFps:values.length*1000/(t-first),p95FrameMs:values[Math.floor(values.length*.95)],maxFrameMs:values.at(-1)});}}requestAnimationFrame(tick);}));
 await page.evaluate(()=>window.__sdkHandlers.game_api_pause());
 await page.waitForTimeout(300);
-if(!await page.evaluate(()=>window.__events.at(-1)==='stop'))throw Error('Missing stop');
+if(!await page.evaluate(()=>window.__events.includes('stop')))throw Error('Missing stop');
 await page.evaluate(()=>window.__sdkHandlers.game_api_resume());
 await page.waitForTimeout(500);await page.screenshot({path:'Tests/Yandex/paused.png'});
 const result=await page.evaluate(()=>({events:__events,language:DrillDropPlatform.language,save:DrillDropPlatform.readSave(),hidden:DrillDropPlatform.hidden,isolated:crossOriginIsolated}));
@@ -26,7 +27,13 @@ if(JSON.parse(await page.evaluate(()=>DrillDropPlatform.readSave())).suspended_r
 language='en';await page.reload();await page.waitForFunction(()=>window.__events?.includes('ready'),null,{timeout:120000});
 await page.waitForTimeout(500);await page.screenshot({path:'Tests/Yandex/menu-en.png'});
 if(await page.evaluate(()=>document.documentElement.lang)!=='en')throw Error('SDK locale not applied');
-result.reloadPreserved=true;result.english=true;
+result.reloadPreserved=true;result.english=true;result.headlessTiming=timing;result.webgl=await page.evaluate(()=>{const gl=document.getElementById('canvas').getContext('webgl2');const ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):'unavailable';});
+result.contextMenuBlocked=await page.evaluate(()=>{const e=new MouseEvent('contextmenu',{bubbles:true,cancelable:true});document.getElementById('canvas').dispatchEvent(e);return e.defaultPrevented;});
+if(!result.contextMenuBlocked)throw Error('Context menu not blocked');
+await page.setViewportSize({width:1280,height:720});await page.waitForTimeout(500);await page.screenshot({path:'Tests/Yandex/desktop.png'});
+result.desktopCanvas=await page.locator('canvas').boundingBox();
+if(result.desktopCanvas.width>600||result.desktopCanvas.height>720)throw Error('Desktop portrait layout');
+
 fs.writeFileSync('Tests/Yandex/browser.json',JSON.stringify({result,errors},null,2));
 console.log(JSON.stringify({events:result.events,errors,saveBytes:result.save.length}));
 await browser.close();if(errors.length)process.exitCode=1;

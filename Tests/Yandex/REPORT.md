@@ -1,11 +1,12 @@
-# Yandex Games web build verification — 2026-10-04
+# Yandex Games verification — 2026-10-07
 
-- Godot 4.3 Compatibility / WebGL 2, single-thread export. Native Godot 4.2.2 editor and import cache remain separate.
-- Final ZIP: 53,211,213 bytes; uncompressed contents: 82,984,720 bytes. SHA-256 in `build.json`.
-- Archive CRC, root index.html, ASCII filenames, 100 MB limit and shipped bridge checked. SDK is loaded from /sdk.js; no SDK mock is shipped.
-- Chromium, portrait 430×932, touch input: actual exported menu loads, tap starts a 3D run; ready/start/stop events observed.
-- Platform pause and resume tested, browser progress survives page reload, Russian and English SDK locales render correctly. Screenshots and browser.json accompany this report.
-- Local browser tests inject an SDK test double through Playwright routing; live Yandex-hosted SDK and moderation have NOT been verified.
-- SDK adapter tests cover one-time ready, state transitions, focus, SDK pause, menu resume and storage.
-- Native regression: LOBBY TEST 0 failures; PLATFORM PAUSE 0 failures (game state, audio mute, restoring previous mute, manual resume).
-- Full campaign playthrough on the Yandex-hosted build, physical phones, Safari and performance certification are not covered by this smoke test. No cloud saves or monetization is advertised.
+- Final artifact and SHA-256: `build.json`, `Builds/DrillDrop-Yandex.zip`.
+- Godot 4.3 single-thread WebGL 2 export; native editor remains on 4.2.2.
+- Chromium browser smoke: actual exported menu, touch starts 3D gameplay, platform pause/resume, ready/start/stop, RU/EN, reload persistence and contextmenu prevention; zero JS errors.
+- Desktop canvas centered at 480×720 in a 1280×720 viewport; mobile 430×932. Captures included.
+- GPU: ANGLE Metal Renderer Apple M2. Five-second gameplay sample: 300 frames, 60 fps average, p95 18.7 ms, max 18.8 ms. Not a guarantee for other devices or long sessions. Initial SwiftShader software-rendering measurement (~1 fps) was not representative of hardware performance; test now explicitly enables Metal.
+- Cloud tests: initial remote restore, local save, write throttling, offline failure/recovery, account isolation, disabled storage. Browser SDK double implements getPlayer/getData/setData; real Yandex server behavior still needs verification in draft.
+- Profile no longer loads another account's unscoped user:// save on web. Legacy browser saves migrate once; cloud writes disabled for the session if initial remote read fails, preserving unknown remote progress.
+- Native lobby/pause regression passed earlier; current changes keep the native profile path unchanged.
+- The user's draft URL could not be accessed using available browser tools. Do not claim hosted SDK validation or moderation approval.
+- All 23 screenshot items, remaining cabinet fields and content notes: `Web/PUBLICATION-CHECKLIST.md`. Suggested localized listing: `Web/STORE-LISTING.md`.

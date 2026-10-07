@@ -1,0 +1,20 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
+let timers=new Map(),next=0,now=10000;const storage=new Map();
+const ctx={window:{},TextEncoder,setTimeout:fn=>{timers.set(++next,fn);return next;},clearTimeout:id=>timers.delete(id)};vm.createContext(ctx);vm.runInContext(fs.readFileSync('Web/save-store.js','utf8'),ctx);
+const Store=ctx.window.DrillDropSaveStore,io={getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)};
+const envelope=(coins,date)=>({version:1,savedAt:date,data:{coins,unlocked:2,music:.2}});
+(async()=>{
+let remote=envelope(75,5000),writes=0,fail=false;
+const player={getUniqueID:()=> 'a',getData:async()=>{if(fail)throw Error('offline');return{drilldrop:remote}},setData:async d=>{writes++;remote=d.drilldrop;}};
+const sdk={getPlayer:async()=>player};
+let s=new Store(io,'app',()=>now);await s.connect(sdk);assert.equal(JSON.parse(s.readSave()).coins,75);
+s.writeSave('{"coins":90,"unlocked":3}');await s.flush();assert.equal(remote.data.coins,90);assert.equal(writes,1);
+s.writeSave('{"coins":91}');await s.flush();assert.equal(writes,1);now+=10001;await s.flush();assert.equal(remote.data.coins,91);
+s=new Store(io,'app',()=>now);await s.connect(sdk);assert.equal(JSON.parse(s.readSave()).coins,91);
+fail=true;s=new Store(io,'app',()=>now);await s.connect(sdk);s.writeSave('{"coins":99}');await s.flush();assert.equal(writes,2);
+fail=false;now+=10001;s=new Store(io,'app',()=>now);await s.connect(sdk);await s.flush();assert.equal(remote.data.coins,99);
+let other=new Store(io,'app',()=>now);await other.connect({getPlayer:async()=>({...player,getUniqueID:()=> 'b',getData:async()=>({})})});assert.equal(other.readSave(),'');
+let offline=new Store(io,'local',()=>now);offline.writeSave('{"coins":13}');offline=new Store(io,'local',()=>now);assert.equal(JSON.parse(offline.readSave()).coins,13);
+let denied=new Store(null,'denied',()=>now);denied.writeSave('{"coins":7}');assert.equal(JSON.parse(denied.readSave()).coins,7);
+console.log('Cloud: restore, write, throttle, offline recovery, account isolation, local fallback, blocked storage PASS');
+})();

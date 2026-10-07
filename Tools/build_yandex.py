@@ -37,7 +37,7 @@ variant/thread_support=false
 vram_texture_compression/for_desktop=true
 vram_texture_compression/for_mobile=true
 html/custom_html_shell="res://Web/shell.html"
-html/canvas_resize_policy=2
+html/canvas_resize_policy=0
 html/focus_canvas_on_start=true
 progressive_web_app/enabled=false
 '''%(','.join(json.dumps(x) for x in files),(OUT/'index.html').as_posix(),(TC/'web_nothreads_release.zip').as_posix())
@@ -53,7 +53,7 @@ for phase,args in [('import',['--editor','--import']),('export',['--export-relea
   result=subprocess.run([str(GODOT),'--headless','--path',str(STAGE)]+args,stdout=log,stderr=subprocess.STDOUT,timeout=600)
  print(phase,result.returncode,flush=True)
  if result.returncode:raise SystemExit(result.returncode)
-for src,dst in [('Web/yandex.js','yandex.js'),('Art/UI/Lobby/splash.png','splash.png'),('Art/UI/Lobby/app-icon.png','app-icon.png'),('Art/UI/Fonts/LICENSE.txt','fonts-license.txt')]:shutil.copy(ROOT/src,OUT/dst)
+for src,dst in [('Web/GODOT-LICENSE.txt','godot-license.txt'),('Web/save-store.js','save-store.js'),('Web/yandex.js','yandex.js'),('Art/UI/Lobby/splash.png','splash.png'),('Art/UI/Lobby/app-icon.png','app-icon.png'),('Art/UI/Fonts/LICENSE.txt','fonts-license.txt')]:shutil.copy(ROOT/src,OUT/dst)
 archive=ROOT/'Builds/DrillDrop-Yandex.zip'
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
  for p in OUT.iterdir():
